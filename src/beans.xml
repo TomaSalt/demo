@@ -1,0 +1,23 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   
+   <bean id="mainspring" class="egzaminui.demo.Pagrindinis" scope="singleton">
+		<constructor-arg index="0" ref="skaitymas_is_failo" />
+		<constructor-arg index="1" ref="rasymas_faile" />
+		<constructor-arg index="2" value="src/egzaminuidemo.csv" />		
+		<constructor-arg index="3" value="src/irasomasfailas.txt" />
+
+   </bean>
+
+   <bean id = "skaitymas_is_failo" class = "egzaminui.demo.SkaitymasIsFailo" scope = "singleton">
+   </bean>
+   
+   <bean id = "rasymas_faile" class = "egzaminui.demo.RasymasFaile" scope = "singleton">
+   </bean>  
+   
+</beans>
