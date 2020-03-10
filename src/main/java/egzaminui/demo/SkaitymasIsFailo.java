@@ -45,7 +45,7 @@ public class SkaitymasIsFailo {
 			paimtiEilute();
 			
 			zodziai.add ( file_line );
-			System.out.println ( file_line );
+			//System.out.println ( file_line );
 	
 			skaitytiEilute();
 		}		

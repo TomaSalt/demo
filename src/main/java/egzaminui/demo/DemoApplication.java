@@ -12,7 +12,8 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 		ApplicationContext context = new ClassPathXmlApplicationContext( "file:src/beans.xml" );
 		Pagrindinis pagr = (Pagrindinis) context.getBean("mainspring");
-		pagr.Dariti();
+		pagr.Daryti();
+		pagr.ILentele();
 		((ClassPathXmlApplicationContext) context).close();
 	
 	}

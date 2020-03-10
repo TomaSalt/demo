@@ -12,14 +12,14 @@ public class Lentele {
 	private ArrayList<String> stulpeliu_tipai;
 	private int kiekis_stulpeliu = 0;
 	private int duomenu_eiluciu_skaicius = 0;
-	private ArrayList<ArrayList<Cele>> lent_duomenys;
+	private ArrayList<ArrayList<String>> lent_duomenys;
 	
 		
 	public Lentele() {
 		
 	}
 	
-	public Lentele(String lenteles_pav, ArrayList<String> stulpeliu_pav, ArrayList<String> stulpeliu_tipai, int kiekis_stulpeliu, int duomenu_eiluciu_skaicius, ArrayList<ArrayList<Cele>> lent_duomenys) {
+	public Lentele(String lenteles_pav, ArrayList<String> stulpeliu_pav, ArrayList<String> stulpeliu_tipai, int kiekis_stulpeliu, int duomenu_eiluciu_skaicius, ArrayList<ArrayList<String>> lent_duomenys) {
 
 		
 		this.lenteles_pav = lenteles_pav;
