@@ -31,7 +31,7 @@ public class Lentele {
 		
 	}	
 	
-	public void spausdintiLentele() {
+	/*public void spausdintiLentele() {
 		
 		System.out.println ( "\n"+ this.lenteles_pav + ": \n");
 		
@@ -56,5 +56,5 @@ public class Lentele {
 			
 		}
 
-	}
+	}*/
 }
