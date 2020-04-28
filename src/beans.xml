@@ -9,7 +9,9 @@
    <bean id="mainspring" class="egzaminui.demo.Pagrindinis" scope="singleton">
 		<constructor-arg index="0" ref="skaitymas_is_failo" />
 		<constructor-arg index="1" ref="rasymas_faile" />
-		<constructor-arg index="2" value="src/egzaminuidemo.csv" />		
+		<!--<constructor-arg index="2" value="src\main\resources\templates\produktas.html" />-->	
+		<!--<constructor-arg index="3" value="src\main\resources\HTMLFaila.txt" />-->
+		<constructor-arg index="2" value="src/egzaminuidemo2.csv" />	
 		<constructor-arg index="3" value="src/irasomasfailas.txt" />
 
    </bean>
