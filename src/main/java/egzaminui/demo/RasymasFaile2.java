@@ -4,16 +4,16 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-public class RasymasFaile {
+public class RasymasFaile2 {
 
 	
 	public String vardas_failo;
 	
-	public RasymasFaile() {
+	public RasymasFaile2() {
 		
 	}
 	
-	public RasymasFaile( String vardas_failo ) {
+	public RasymasFaile2( String vardas_failo ) {
 		
 		this.vardas_failo = vardas_failo;
 	}
@@ -31,7 +31,7 @@ public class RasymasFaile {
 
 			for ( String value : zodziai ) { 
 						
-				bw.write (/*"JavaFailui.add(\"" + */value /*+ "\");\n"*/+ "\n");
+				bw.write ("JavaFailui.add(\"" + value + "\");\n");
 			}
 			bw.close();
 					
