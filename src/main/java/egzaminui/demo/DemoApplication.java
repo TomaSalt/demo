@@ -28,6 +28,11 @@ public class DemoApplication {
 		pagr.setIrasomo_failo_var(irasomo_failo_vardas);
 		RasymasFaile rasymas = new RasymasFaile(irasomo_failo_vardas);
 		rasymas.iEilutes(duomenys);
+		KurtiPageControllerFaila pageControllerFailoDuomenys = new KurtiPageControllerFaila(lenteliu_duomenys);
+		duomenys = pageControllerFailoDuomenys.JavaFailui();
+		irasomo_failo_vardas = "src/main/java/egzaminui/demo/PageController.java";
+		rasymas = new RasymasFaile(irasomo_failo_vardas);
+		rasymas.iEilutes(duomenys);
 		
 		for(int i = 0; i < lenteliu_duomenys.size(); i++) {
 					
@@ -47,10 +52,10 @@ public class DemoApplication {
 				rasymas = new RasymasFaile(irasomo_failo_vardas);
 				rasymas.iEilutes(duomenys);
 			}
-		SkaitymasIsFailo page_control_skaitymas = new SkaitymasIsFailo("src/PageController.java");
+		/*SkaitymasIsFailo page_control_skaitymas = new SkaitymasIsFailo("src/PageController.java");
 		ArrayList<String> duomenysPage = page_control_skaitymas.iMasyva();
 		RasymasFaile2 rasymas2 = new RasymasFaile2("src/main/java/egzaminui/demo/PageController2.java");
-		rasymas2.iEilutes(duomenysPage);
+		rasymas2.iEilutes(duomenysPage);*/
 		((ClassPathXmlApplicationContext) context).close();
 	
 	}
