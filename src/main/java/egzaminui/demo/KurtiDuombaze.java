@@ -1,6 +1,7 @@
 package egzaminui.demo;
 //STEP 1. Import required packages
 import java.sql.*;
+import java.util.ArrayList;
 public class KurtiDuombaze {
 
    // JDBC driver name and database URL
@@ -11,16 +12,19 @@ public class KurtiDuombaze {
    static final String USER = "root";
    static final String PASS = "";
    private String database_name;
+   ArrayList<Lentele> lenteles;
    
-   public KurtiDuombaze(String name) {
+   public KurtiDuombaze(String name, ArrayList<Lentele> lenteles) {
 	   
 	   this.database_name = name;
+	   this.lenteles = lenteles;
    }
    
    public void Kurti() {
 	   
 	   Connection conn = null;
 	   Statement stmt = null;
+	   String sql_lent = "";
 	   
 	   try{
 	      //STEP 2: Register JDBC driver
@@ -34,10 +38,19 @@ public class KurtiDuombaze {
 	      System.out.println("Creating database...");
 	      stmt = conn.createStatement();
 	      
-	      String sql = "CREATE DATABASE " + database_name;
-	      //String sql = "DROP DATABASE " + database_name;
-	      stmt.executeUpdate(sql);
+	      String sql_database = "CREATE DATABASE " + database_name;
+	      //String sql_database = "DROP DATABASE " + database_name;
+	      stmt.executeUpdate(sql_database);
 	      System.out.println("Database created successfully...");
+	      //STEP 5: Execute a query
+	      for (int i = 0; i < lenteles.size(); i++) {
+	    	  System.out.println("Creating table...");
+	    	  KurtiSqlLentele sql_lentele = new KurtiSqlLentele(lenteles.get(i));
+	    	  sql_lent = sql_lentele.Vykdyti();
+	    	  stmt = conn.createStatement();
+	    	  stmt.executeUpdate(sql_lent);
+	    	  System.out.println("Table created successfully...");
+	      }
 
 	   }catch(SQLException se){
 	      //Handle errors for JDBC

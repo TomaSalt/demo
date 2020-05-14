@@ -33,12 +33,11 @@ public class DemoApplication {
 		irasomo_failo_vardas = "src/main/java/egzaminui/demo/PageController.java";
 		RasymasFaile rasymas = new RasymasFaile(irasomo_failo_vardas);
 		rasymas.iEilutes(duomenys);*/
-		KurtiDuombaze db_kurimas = new KurtiDuombaze("demo");
+		KurtiDuombaze db_kurimas = new KurtiDuombaze("demo", lenteliu_duomenys);
 		db_kurimas.Kurti();
 		
 		for(int i = 0; i < lenteliu_duomenys.size(); i++) {
-				KurtiSqlLentele sql_lentele = new KurtiSqlLentele(lenteliu_duomenys.get(i));
-				sql_lentele.Vykdyti();
+
 				/*KurtiJavaFaila javaFailoDuomenys = new KurtiJavaFaila(lenteliu_duomenys.get(i));
 				duomenys = javaFailoDuomenys.JavaFailui();
 				irasomo_failo_vardas = "src/main/java/egzaminui/demo/" + StringUtils.capitalize(lenteliu_duomenys.get(i).getLenteles_pav()) + ".java";
