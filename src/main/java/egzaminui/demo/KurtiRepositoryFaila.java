@@ -27,7 +27,7 @@ public class KurtiRepositoryFaila {
 		JavaFailui.add("");
 		JavaFailui.add("public interface " + StringUtils.capitalize(lentele.getLenteles_pav()) + "Repository extends CrudRepository<" + StringUtils.capitalize(lentele.getLenteles_pav()) + ", Integer>{");
 		JavaFailui.add("");
-		JavaFailui.add("	//" + StringUtils.capitalize(lentele.getLenteles_pav()) + " findByPav( String pav );");
+		JavaFailui.add("	//List<" + StringUtils.capitalize(lentele.getLenteles_pav()) + ">findBy" + StringUtils.capitalize(lentele.getStulpeliu_pav().get(1)) + "( " + lentele.getStulpeliu_tipai().get(1) + " " + lentele.getStulpeliu_pav().get(1) + " );");
 		JavaFailui.add("");
 		String select_stulpeliu_pav = "";
 		String kablelis = "";

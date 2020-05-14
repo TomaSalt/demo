@@ -1,6 +1,8 @@
 package egzaminui.demo;
 import java.util.ArrayList;
 import org.springframework.util.StringUtils;
+
+
 public class KurtiPageControllerFaila {
 	
 	private ArrayList<Lentele> lenteles;
@@ -54,13 +56,21 @@ public class KurtiPageControllerFaila {
 		JavaFailui.add("	}");
 		JavaFailui.add("	");
 		String kablelis = "";
+		JavaFailui.add("	@RequestMapping(path=\"/\", method={ RequestMethod.GET, RequestMethod.POST })");
+		JavaFailui.add("	public String index(Model model) {");
+		JavaFailui.add("		model.addAttribute(\"lst_menu\", Menu.values() );");
+		JavaFailui.add("		return \"index\";");
+		JavaFailui.add("	}");
+		JavaFailui.add("	");
 		for( int i=0; i < lenteles.size(); i++ ) {
+			kablelis = "";
 			JavaFailui.add("	@RequestMapping(path=\"" + (char)47 + lenteles.get(i).getLenteles_pav() + "\", method={ RequestMethod.GET, RequestMethod.POST })");
 			JavaFailui.add("    public String " + lenteles.get(i).getLenteles_pav() + "(");
 			for(int y=0; y < (lenteles.get(i).getKiekis_stulpeliu()); y++) {
-				JavaFailui.add("    		" + kablelis + " @RequestParam(name=\"" + lenteles.get(i).getStulpeliu_pav().get(y) + "\", required=false, defaultValue=\"\") " + lenteles.get(i).getStulpeliu_tipai().get(y) + " " + lenteles.get(i).getStulpeliu_pav().get(y) + ");");
+				JavaFailui.add("    		" + kablelis + " @RequestParam(name=\"" + lenteles.get(i).getStulpeliu_pav().get(y) + "\", required=false, defaultValue=\"\") " + lenteles.get(i).getStulpeliu_tipai().get(y) + " " + lenteles.get(i).getStulpeliu_pav().get(y));
 				kablelis = ",";
 			}
+			
 			JavaFailui.add("    		, @RequestParam(name=\"veiksmas\", required=false, defaultValue=\"neveikti\") String veiksmas");
 			JavaFailui.add("    		, @RequestParam(name=\"salinti\", required=false, defaultValue=\"nesalinti\") String salinti");
 			JavaFailui.add("    		, Model model ");
@@ -70,27 +80,27 @@ public class KurtiPageControllerFaila {
 			JavaFailui.add("		");
 			JavaFailui.add("        if ( veiksmas.equals(\"papildyti\") ) {");
 			JavaFailui.add("        	");
-			JavaFailui.add("        	List<" + StringUtils.capitalize(lenteles.get(i).getLenteles_pav()) + "> lst_" + lenteles.get(i).getLenteles_pav() + " = " + lenteles.get(i).getLenteles_pav() + "_rep.findBy" + StringUtils.capitalize(lenteles.get(i).getStulpeliu_pav().get(1)) + "(" + lenteles.get(i).getStulpeliu_pav().get(1) + ");");
+			JavaFailui.add("        	/*List <" + StringUtils.capitalize(lenteles.get(i).getLenteles_pav()) + "> lst_" + lenteles.get(i).getLenteles_pav() + " = " + lenteles.get(i).getLenteles_pav() + "_rep.findBy" + StringUtils.capitalize(lenteles.get(i).getStulpeliu_pav().get(1)) + "( " + lenteles.get(i).getStulpeliu_pav().get(1) + " );");
 			JavaFailui.add("        	");
 			JavaFailui.add("        	if ( lst_" + lenteles.get(i).getLenteles_pav() + ".size() > 0 ) {");
 			JavaFailui.add("        		");
-			JavaFailui.add("        		back_end_message.setMessage( \"produktas su tokiu pav '" + lenteles.get(i).getStulpeliu_pav().get(1) + "' jau egzistuoja\" );");
+			JavaFailui.add("        		back_end_message.setMessage( \"produktas su tokiu pav '\" + " + lenteles.get(i).getStulpeliu_pav().get(1) + " + \"' jau egzistuoja\" );");
 			JavaFailui.add("        		back_end_message.setCss_class( \"pranesimas_red\" );");
 			JavaFailui.add("        		");
-			JavaFailui.add("        	} else {");
+			JavaFailui.add("        	} else {*/");
 			JavaFailui.add("        		");
 			String stulpeliu_sarasas = "";
 			kablelis = "";
 			for(int y=0; y < lenteles.get(i).getKiekis_stulpeliu(); y++) {
-				stulpeliu_sarasas = kablelis + " " + lenteles.get(i).getStulpeliu_pav().get(y);
+				stulpeliu_sarasas += kablelis + " " + lenteles.get(i).getStulpeliu_pav().get(y);
 				kablelis = ",";
 			}
-			JavaFailui.add("	        	" + StringUtils.capitalize(lenteles.get(i).getLenteles_pav()) + " " + lenteles.get(i).getLenteles_pav() + " = new " + StringUtils.capitalize(lenteles.get(i).getLenteles_pav()) + "( " + stulpeliu_sarasas + " );");
+			JavaFailui.add("	        	" + StringUtils.capitalize(lenteles.get(i).getLenteles_pav()) + " " + lenteles.get(i).getLenteles_pav() + " = new " + StringUtils.capitalize(lenteles.get(i).getLenteles_pav()) + "(" + stulpeliu_sarasas + " );");
 			JavaFailui.add("	        	" + lenteles.get(i).getLenteles_pav() + "_rep.save( " + lenteles.get(i).getLenteles_pav() + " );");
-			JavaFailui.add("        		back_end_message.setMessage( \"į sąrašą įtrauktas '" + lenteles.get(i).getStulpeliu_pav().get(1) + "'\" );");
+			JavaFailui.add("        		back_end_message.setMessage( \"į sąrašą įtrauktas '\" + " + lenteles.get(i).getStulpeliu_pav().get(1) + " + \"'\" );");
 			JavaFailui.add("        		back_end_message.setCss_class( \"pranesimas_green\" );");
 			JavaFailui.add("        		");
-			JavaFailui.add("        	}");
+			JavaFailui.add("        	//}");
 			JavaFailui.add("        }");
 			JavaFailui.add("        ");
 			JavaFailui.add("        if ( veiksmas.equals(\"pakeisti\") ) {");
@@ -102,7 +112,7 @@ public class KurtiPageControllerFaila {
 			JavaFailui.add("    			");
 			JavaFailui.add("        		" + lenteles.get(i).getLenteles_pav() + " = found.get();");
 			for(int y=0; y < lenteles.get(i).getKiekis_stulpeliu(); y++) {
-				JavaFailui.add("        		" + lenteles.get(i).getLenteles_pav() + ".set" + StringUtils.capitalize(lenteles.get(i).getLenteles_pav()) + "(" + lenteles.get(i).getLenteles_pav() + ");");
+				JavaFailui.add("        		" + lenteles.get(i).getLenteles_pav() + ".set" + StringUtils.capitalize(lenteles.get(i).getStulpeliu_pav().get(y)) + "( " + lenteles.get(i).getStulpeliu_pav().get(y) + " );");
 			}
 
 			JavaFailui.add("	        	" + lenteles.get(i).getLenteles_pav() + "_rep.save( " + lenteles.get(i).getLenteles_pav() + " );");
@@ -115,7 +125,7 @@ public class KurtiPageControllerFaila {
 			JavaFailui.add("        	");
 			JavaFailui.add("        	if ( found.isPresent() ) {");
 			JavaFailui.add("    			");
-			JavaFailui.add("        		" + lenteles.get(i).getLenteles_pav() + "_rep.deleteById(id);");
+			JavaFailui.add("        		" + lenteles.get(i).getLenteles_pav() + "_rep.deleteById( id );");
 			JavaFailui.add(" 		");
 			JavaFailui.add(" 			}");
 			JavaFailui.add("        }");
@@ -123,12 +133,11 @@ public class KurtiPageControllerFaila {
 			JavaFailui.add("        model.addAttribute( \"lst_menu\", Menu.values() ); ");
 			JavaFailui.add("        model.addAttribute( \"lst\", " + lenteles.get(i).getLenteles_pav() + "_rep.findAll() );");
 			JavaFailui.add("        ");
-			JavaFailui.add("        ");
 			JavaFailui.add("        return " + lenteles.get(i).getLenteles_pav() + ";");
 			JavaFailui.add("    }");
 			JavaFailui.add("	");
-			JavaFailui.add("}");
 		}
+		JavaFailui.add("}");
 		return JavaFailui;
 	}
 }

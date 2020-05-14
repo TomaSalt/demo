@@ -41,7 +41,7 @@ public class KurtiHtmlFaila {
 		HtmlFailui.add("<!DOCTYPE html>");
 		HtmlFailui.add("<html xmlns:th=\"http://www.thymeleaf.org\">");
 		HtmlFailui.add("<head>");
-		HtmlFailui.add("	<title>" + this.lentele.getLenteles_pav() + "</title>");
+		HtmlFailui.add("	<title>" + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "</title>");
 		HtmlFailui.add("	<meta charset=\"utf-8\">");
 		HtmlFailui.add("	<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
 		HtmlFailui.add("	<link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">");
@@ -81,6 +81,16 @@ public class KurtiHtmlFaila {
 		HtmlFailui.add("					return true;");
 		HtmlFailui.add("				}");
 		HtmlFailui.add("			}");
+		HtmlFailui.add("			function checkNumber( o, n, min, max ) {");
+		HtmlFailui.add("				if ( parseInt( o.val() ) > max || parseInt ( o.val() ) < min ) {");
+		HtmlFailui.add("					o.addClass( \"ui-state-error\" );");
+		HtmlFailui.add("					updateTips( n +  \" reikšmė turi būti tarp \" +");
+		HtmlFailui.add("						min + \" ir \" + max + \".\" );");
+		HtmlFailui.add("					return false;");
+		HtmlFailui.add("				} else {");
+		HtmlFailui.add("					return true;");
+		HtmlFailui.add("				}");
+		HtmlFailui.add("			}");
 		HtmlFailui.add("			function checkRegexp( o, regexp, n ) {");
 		HtmlFailui.add("				if ( !( regexp.test( o.val() ) ) ) {");
 		HtmlFailui.add("					o.addClass( \"ui-state-error\" );");
@@ -90,15 +100,21 @@ public class KurtiHtmlFaila {
 		HtmlFailui.add("					return true;");
 		HtmlFailui.add("				}");
 		HtmlFailui.add("			}");
-		HtmlFailui.add("			function addProduct() {");
+		HtmlFailui.add("			function addElement() {");
 		HtmlFailui.add("				var valid = true;");
 		HtmlFailui.add("				allFields.removeClass( \"ui-state-error\" );");
 		for (int i = 1; i < this.lentele.getStulpeliu_pav().size(); i++) {
-			HtmlFailui.add("				valid = valid && checkLength( " + this.lentele.getStulpeliu_pav().get(i) + ", \"" + this.lentele.getStulpeliu_pav().get(i) + "\", 1, 30 );");
+			if( this.lentele.getStulpeliu_tipai().get(i).equals("String") ) {
+				HtmlFailui.add("				valid = valid && checkLength( " + this.lentele.getStulpeliu_pav().get(i) + ", \"" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "\", 1, 30 );");
+			}
+			if( ( this.lentele.getStulpeliu_tipai().get(i).equals("Integer") ) || ( this.lentele.getStulpeliu_tipai().get(i).equals("Double") ) ) {
+				HtmlFailui.add("				valid = valid && checkNumber( " + this.lentele.getStulpeliu_pav().get(i) + ", \"" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "\", 0, 1000 );");
+			}
 		}
+		HtmlFailui.add("				// valid = valid && checkRegexp( " + this.lentele.getStulpeliu_pav().get(1) + ", /^[a-z]([0-9a-z_\\s])+$/i, \"product may consist of a-z, 0-9, underscores, spaces and must begin with a letter.\");");
 		HtmlFailui.add("				if ( valid ) {");
-		HtmlFailui.add("					alert ( 'submitinam ..'  + " + this.lentele.getStulpeliu_pav().get(1)+ ".val() );"); 
-		HtmlFailui.add("					$( '#produkto_forma' ).submit();");	
+		HtmlFailui.add("					alert ( 'Submiting '  + " + this.lentele.getStulpeliu_pav().get(1)+ ".val() );"); 
+		HtmlFailui.add("					$( '#element_forma' ).submit();");	
 		HtmlFailui.add("					dialog.dialog( \"close\" );");	
 		HtmlFailui.add("				}");
 		HtmlFailui.add("				return valid;");
@@ -109,7 +125,7 @@ public class KurtiHtmlFaila {
 		HtmlFailui.add(" 				width: 350,");
 		HtmlFailui.add("				modal: true,");
 		HtmlFailui.add("				buttons: {");
-		HtmlFailui.add("					\"Sukurti\": addProduct,");
+		HtmlFailui.add("					\"Sukurti\": addElement,");
 		HtmlFailui.add("					Atšaukti: function() {");
 		HtmlFailui.add("						dialog.dialog( \"close\" );");
 		HtmlFailui.add("					}");
@@ -136,7 +152,7 @@ public class KurtiHtmlFaila {
 		HtmlFailui.add("					}");
 		HtmlFailui.add("				}");
 		HtmlFailui.add("			});");
-		HtmlFailui.add("			$( \"#create-product\" ).button().on( \"click\", function() {");
+		HtmlFailui.add("			$( \"#create-element\" ).button().on( \"click\", function() {");
 		HtmlFailui.add("				$( '#pav_veiksmo' ).html ( 'Kuriamas naujas įrašas' );");
 		HtmlFailui.add("				$( '#veiksmas' ).val ( 'papildyti' );");
 		HtmlFailui.add("				dialog.dialog( \"open\" );");
@@ -152,7 +168,7 @@ public class KurtiHtmlFaila {
 			HtmlFailui.add("					$('#" + this.lentele.getStulpeliu_pav().get(i) + "').val( $( this ).data ( '" + this.lentele.getStulpeliu_pav().get(i) + "' ));");
 			
 		}
-		HtmlFailui.add("					$( '#id_taisomo_iraso' ).val ( id);");
+		HtmlFailui.add("					$( '#id_taisomo_iraso' ).val ( id );");
 		HtmlFailui.add("					$( '#pav_veiksmo' ).html (  'Koreguojamas įrašas' );");
 		HtmlFailui.add("					$( '#veiksmas' ).val ( 'pakeisti' );");
 /*		HtmlFailui.add("					kilme = $( this ).data( 'kilme' );");
@@ -164,15 +180,10 @@ public class KurtiHtmlFaila {
 		HtmlFailui.add("			$( \".salinti\" ).each ( function() {");
 		HtmlFailui.add("		");
 		HtmlFailui.add("				$( this ).on( \"click\", function() {");
-		HtmlFailui.add("			");
-		for (int i = 0; i < 2; i++) {
-			
-			HtmlFailui.add("					" + this.lentele.getStulpeliu_pav().get(i) + "= $( this ).data( '" + this.lentele.getStulpeliu_pav().get(i) + "' );");			
-			
-		}
+		HtmlFailui.add("			");		
 		HtmlFailui.add("					$( '#id_salinamo_iraso' ).val ( id );");
-		HtmlFailui.add("					$( '#pav_salinamo_iraso' ).html (" + this.lentele.getStulpeliu_pav().get(1) + ");");
-		HtmlFailui.add("					trintidialog.dialog( \"open\" );	");
+		HtmlFailui.add("					$( '#pav_salinamo_iraso' ).html ($( this ).data('" + this.lentele.getStulpeliu_pav().get(1) + "'));");
+		HtmlFailui.add("					trintidialog.dialog( \"open\" );");
 		HtmlFailui.add("				});");
 		HtmlFailui.add("			});");
 		HtmlFailui.add("		});");
@@ -187,21 +198,20 @@ public class KurtiHtmlFaila {
 		HtmlFailui.add("			</li>");
 		HtmlFailui.add("		</ul>");
 		HtmlFailui.add("	</div>");
-		HtmlFailui.add("	<div id=\"dialog-form\" title=\"" + this.lentele.getLenteles_pav() + "\">");
+		HtmlFailui.add("	<div id=\"dialog-form\" title=\"" + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "\">");
 		HtmlFailui.add("		<p class=\"validateTips\">Visi laukai privalomi</p>");
 		HtmlFailui.add("		<p id=\"pav_veiksmo\"></p>");
-		HtmlFailui.add("		<form id=\"produkto_forma\" method=\"POST\">");
+		HtmlFailui.add("		<form id=\"element_forma\" method=\"POST\">");
 		HtmlFailui.add("			<fieldset>");
-		for (int i = 0; i < this.lentele.getStulpeliu_pav().size(); i++) {
+		for (int i = 1; i < this.lentele.getStulpeliu_pav().size(); i++ ) {
 			
 			HtmlFailui.add("				<label for=\"" + this.lentele.getStulpeliu_pav().get(i) + "\">"+ this.lentele.getStulpeliu_pav().get(i) + "</label>");
-			if(this.lentele.getStulpeliu_tipai().get(i) == "String") {
-				System.out.println("!!!!Stulpeliu tipai!!!! " + this.lentele.getStulpeliu_tipai().get(i));
+			if( this.lentele.getStulpeliu_tipai().get(i).equals("String")) {
 				
 				HtmlFailui.add("				<input type=\"text\" name=\"" + this.lentele.getStulpeliu_pav().get(i) + "\" id=\"" + this.lentele.getStulpeliu_pav().get(i) + "\" value=\"\" class=\"text ui-widget-content ui-corner-all\" required>");
 			
 			}
-			if(this.lentele.getStulpeliu_tipai().get(i) == "Integer" || this.lentele.getStulpeliu_tipai().get(i) == "Double") {
+			if(this.lentele.getStulpeliu_tipai().get(i).equals("Integer") || this.lentele.getStulpeliu_tipai().get(i).equals("Double")){
 				
 				HtmlFailui.add("				<input type=\"number\" name=\"" + this.lentele.getStulpeliu_pav().get(i) + "\" id=\"" + this.lentele.getStulpeliu_pav().get(i) + "\" value=\"0\" class=\"text ui-widget-content ui-corner-all\" required>");
 			}
@@ -217,14 +227,14 @@ public class KurtiHtmlFaila {
 		HtmlFailui.add("	</div>");
 		HtmlFailui.add("	<div id=\"main\">");
 		HtmlFailui.add("		<h3>Esami " + this.lentele.getLenteles_pav() + "</h3>");
-		HtmlFailui.add("		<button id=\"create-product\">Irašyti naują</button>");
+		HtmlFailui.add("		<button id=\"create-element\">Irašyti naują</button>");
 		HtmlFailui.add("		<table id=\"duombazes_lentele\">");
 		HtmlFailui.add("			<thead>");
 		HtmlFailui.add("			<tr>");
 		HtmlFailui.add("				<th>Veiksmai</th>");
 		for (int i = 1; i < this.lentele.getStulpeliu_pav().size(); i++) {
 			
-			HtmlFailui.add("				<th>" + this.lentele.getStulpeliu_pav().get(i) + "</th>");
+			HtmlFailui.add("				<th>" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "</th>");
 			
 		}
 		HtmlFailui.add("			</tr>");
@@ -239,7 +249,6 @@ public class KurtiHtmlFaila {
 			visi_laukai += kablelis + " data-" + this.lentele.getStulpeliu_pav().get(i) + "=${" + this.lentele.getLenteles_pav() + ".get" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "()}";
 			kablelis = ",";
 		}
-		visi_laukai += ";";
 		HtmlFailui.add("					th:attr=\"" + visi_laukai + "\">");
 		visi_laukai = "";
 		visi_laukai += "data-" + this.lentele.getStulpeliu_pav().get(0) + "=${" + this.lentele.getLenteles_pav() + ".get" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(0)) + "()}";
@@ -248,12 +257,12 @@ public class KurtiHtmlFaila {
 		HtmlFailui.add("					th:attr=\"" + visi_laukai + "\">");
 		HtmlFailui.add("				</td>");
 		/*HtmlFailui.add("				<td>");
-		HtmlFailui.add("					<a th:href=\"@{/produktas(id=${produktas.getId()})}\" th:text=\"${produktas.getPav()}\"></a>");
+		HtmlFailui.add("					<a th:href=\"@{/elementas(id=${elementas.getId()})}\" th:text=\"${elementas.getPav()}\"></a>");
 		HtmlFailui.add("				</td>");*/
 		for (int i = 1; i < this.lentele.getStulpeliu_pav().size(); i++) {
 			HtmlFailui.add("				<td th:text=\"${" + this.lentele.getLenteles_pav() + ".get" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "()}\"></td>");
 		}
-		/*HtmlFailui.add("				<td th:text=\"${produktas.getKilme()}==1 ? 'gyvuline' : 'augaline'\">");
+		/*HtmlFailui.add("				<td th:text=\"${elementas.getKilme()}==1 ? 'gyvuline' : 'augaline'\">");
 		HtmlFailui.add("				</td>");*/
 		HtmlFailui.add("			</tr>");
 		HtmlFailui.add("			</tbody>");

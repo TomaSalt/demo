@@ -4,24 +4,13 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-public class RasymasFaile2 {
+public class RasymasFaile2 extends RasymasFaile {
+	
 
-	
-	public String vardas_failo;
-	
-	public RasymasFaile2() {
+	public RasymasFaile2(String vardas_failo) {
 		
+		super();
 	}
-	
-	public RasymasFaile2( String vardas_failo ) {
-		
-		this.vardas_failo = vardas_failo;
-	}
-	
-	public void setVardas_failo( String vardas_failo ) {
-		
-		this.vardas_failo = vardas_failo;
-	}	
 
 	public void iEilutes ( ArrayList<String> zodziai ) {
 		

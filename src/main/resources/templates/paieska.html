@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+	<link rel="stylesheet" href="menu.css">
+	<link rel="stylesheet" href="common.css">
+	<title>Paieška</title>
+<style>
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var dialog, form,
+	pav = $( "#pav" ),
+	allFields = $( [] ).add( pav ),
+      tips = $( ".validateTips" );
+ 
+    function updateTips( t ) {
+      tips
+        .text( t )
+        .addClass( "ui-state-highlight" );
+      setTimeout(function() {
+        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+    }
+	
+	function addProduct() {
+		var valid = true;
+		allFields.removeClass( "ui-state-error" );
+
+		valid = valid;
+
+		if ( valid ) {
+			$( '#produkto_forma' ).submit();
+			dialog.dialog( "close" );
+		}
+		return valid;
+	}
+	
+	form = dialog.find( "form" );  
+	 
+	ieskotidialog =  $( "#dialog-confirm" ).dialog({
+		autoOpen: false,
+		resizable: false,
+		height: "auto",
+		width: 400,
+		modal: true,
+		buttons: {
+			"Ieskoti": function() {
+					$( '#salinimo_forma' ).submit();
+					$( this ).dialog( "close" );
+			},
+		}
+	});
+	$( "#Produkto_paieska" ).button().on( "click", function() {
+			
+			id_medz = $( this ).data( 'id_medz');
+			$('#id_medziagos').val(id_medz);
+			$( '#pav_veiksmo' ).html ( 'Kuriamas naujas irašas' );
+			$( '#veiksmas' ).val ( 'papildyti' );
+			dialog.dialog( "open" );
+	});
+  } );
+  </script>
+</head>
+<body>
+	<div id="menu">
+		<ul id="menu_sarasas">
+			<li id="menu_punktas" th:each="menu_item : ${lst_menu}">
+				<a th:href="${menu_item.itemurl()}" th:text="${menu_item.naujasPavadinimas()}" th:attr="class=${menu_item.itemurl()}=='/paieska' ? 'active' : 'zzz'"></a>
+			</li>
+		</ul>
+	</div>
+	
+<p id="pav_veiksmo"</p>
+
+<div id="main">
+<h3>Paieška</h3>
+	<form id="produkto_forma" method="POST">
+		<fieldset>
+			<label for="pav"></label>
+				<div>
+					<input type="checkbox" name="check_aug" id="check_aug" value="1">
+					<label for="check_aug"> Augalines kilmes </label>
+					
+					<input type="checkbox" name="check_gyv" id="check_gyv" value="1">
+					<label for="check_gyv"> Gyvulines kilmes </label>
+					
+				</div>
+				<input type="hidden" name="veiksmas" id="veiksmas"value="ieskoti">
+				<input type="hidden" name="id" id="id_taisomo_iraso" value="0">
+				<select name="id_medziagos" id="id_medziagos" required> 
+					<option th:each="maistine_medz : ${lst}" 
+						th:value="${maistine_medz.getId()}" 
+						th:text="${maistine_medz.getPav()}"
+						th:selected="${maistine_medz.getId()}==${id_medziagos}">
+					</option>
+				</select>
+			<input type="submit" value="ieskoti"><!-- tabindex="-1" style="position:absolute; top:-1000px" -->
+		</fieldset>
+	</form>
+		<table id="duombazes_lentele">
+		<tr>
+			<th>Id</th>
+			<th>Produktas</th>
+			<th>Kiekis</th>
+			<th>Kilmė</th>
+		</tr>
+		<tbody>
+			<tr th:each="produktas : ${lst_top_produktai}">
+				<td th:text="${produktas[0]}"></td>
+				<td th:text="${produktas[1]}"></td>
+				<td th:text="${produktas[2]}"></td>
+				<td th:text="${produktas[3]} == '0' ? 'augaline' : 'gyvuline'"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+	<div id="dialog-confirm" title="Ieskoti iraso">
+		<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+		<form id="paieskos_forma" method="POST">
+			<input type="hidden" name="ieskoti" value="ieskoti">
+			<input type="hidden" name="id" id="id_salinamo_iraso" value="0">
+			<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		</form>
+	</div>
+</body>
+</html>
