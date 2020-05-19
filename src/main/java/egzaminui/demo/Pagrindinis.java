@@ -16,7 +16,8 @@ public class Pagrindinis{
 	private String skaitomo_failo_var;
 	private String irasomo_failo_var;
 	ArrayList<String> nuskaityti_duomenys;
-	ArrayList<Lentele> lenteles;
+	ArrayList<LenteleSuDuomenimis> lenteles;
+	LenteleBeDuomenu lentele;
 	int lenteliu_skaicius = 0;
 	
 	public Pagrindinis(){
@@ -44,6 +45,14 @@ public class Pagrindinis{
 		this.rf.iEilutes(nuskaityti_duomenys);
 	}
 	
+	public String getSkaitomo_failo_var() {
+		return skaitomo_failo_var;
+	}
+
+	public void setSkaitomo_failo_var(String skaitomo_failo_var) {
+		this.skaitomo_failo_var = skaitomo_failo_var;
+	}
+
 	public String getIrasomo_failo_var() {
 		return irasomo_failo_var;
 	}
@@ -54,7 +63,7 @@ public class Pagrindinis{
 
 	public void SudarytiLenteles(){
 		
-		lenteles = new ArrayList<Lentele>();
+		lenteles = new ArrayList<LenteleSuDuomenimis>();
 		lenteliu_skaicius = 0;
 		String lenteles_pav = "";
 		ArrayList<String> stulpeliu_pav;
@@ -89,7 +98,7 @@ public class Pagrindinis{
 					System.out.println("Tipai " + stulpeliu_tipai.toString());
 					System.out.println("Duomenu eiluciu skaicius " + duomenu_eiluciu_skaicius);
 					System.out.println("Reiksmes " + lent_duomenys.toString());*/
-					lenteles.add( new Lentele(lenteles_pav, stulpeliu_pav, stulpeliu_tipai, kiekis_stulpeliu, duomenu_eiluciu_skaicius, lent_duomenys) );
+					lenteles.add( new LenteleSuDuomenimis(lenteles_pav, stulpeliu_pav, stulpeliu_tipai, kiekis_stulpeliu, duomenu_eiluciu_skaicius, lent_duomenys) );
 				}
 				
 				lenteliu_skaicius += 1;
@@ -131,7 +140,49 @@ public class Pagrindinis{
 		System.out.println("Tipai " + stulpeliu_tipai.toString());
 		System.out.println("Duomenu eiluciu skaicius " + duomenu_eiluciu_skaicius);
 		System.out.println("Reiksmes " + lent_duomenys.toString());*/
-		lenteles.add( new Lentele(lenteles_pav, stulpeliu_pav, stulpeliu_tipai, kiekis_stulpeliu, duomenu_eiluciu_skaicius, lent_duomenys));
+		lenteles.add( new LenteleSuDuomenimis(lenteles_pav, stulpeliu_pav, stulpeliu_tipai, kiekis_stulpeliu, duomenu_eiluciu_skaicius, lent_duomenys));
+	}
+	public void SudarytiAtaskaitosLentele(){
+		
+		lentele = new LenteleBeDuomenu();
+		String lenteles_pav = "";
+		ArrayList<String> stulpeliu_pav;
+		ArrayList<String> stulpeliu_tipai;
+		int kiekis_stulpeliu = 0;
+
+		stulpeliu_pav = new ArrayList<String>();
+		stulpeliu_tipai = new ArrayList<String>();
+		System.out.println("Nuskaityta duomenu eiluciu " + nuskaityti_duomenys.size());
+	
+		for(int i = 0; i < nuskaityti_duomenys.size(); i++){
+
+			ArrayList<String> zodziai = new ArrayList<>(Arrays.asList(nuskaityti_duomenys.get(i).split(";")));
+			//System.out.println("Zodziu sarasas" + zodziai);
+	
+			for (int y = 1; y < zodziai.size(); y++ ){
+				
+				String zodis_1 = zodziai.get(0);
+				
+				switch (zodis_1) {
+				
+					case "Table": 
+						lenteles_pav = zodziai.get(1);
+						break;
+					case "Header":
+						stulpeliu_pav.add(zodziai.get(y));
+						kiekis_stulpeliu += 1; 
+						break;
+					case "Type":
+						stulpeliu_tipai.add(zodziai.get(y));
+						break;
+				}
+			}
+		}
+		System.out.println("Lenteles pavadinimas " + lenteles_pav);
+		System.out.println("Stulpeliu pavadinimai " + stulpeliu_pav.toString());
+		System.out.println("Kiekis stulpeliu " + kiekis_stulpeliu);
+		System.out.println("Tipai " + stulpeliu_tipai.toString());
+		lentele = new LenteleBeDuomenu(lenteles_pav, stulpeliu_pav, stulpeliu_tipai, kiekis_stulpeliu);
 	}
 	public void IsvestiLentelesIKonsole(){
 	
@@ -148,12 +199,20 @@ public class Pagrindinis{
 		}
 	}
 
-	public ArrayList<Lentele> getLenteles() {
+	public ArrayList<LenteleSuDuomenimis> getLenteles() {
 		return lenteles;
 	}
 
-	public void setLenteles(ArrayList<Lentele> lenteles) {
+	public void setLenteles(ArrayList<LenteleSuDuomenimis> lenteles) {
 		this.lenteles = lenteles;
+	}
+
+	public LenteleBeDuomenu getLentele() {
+		return lentele;
+	}
+
+	public void setLentele(LenteleBeDuomenu lentele) {
+		this.lentele = lentele;
 	}
 	
 }

@@ -18,7 +18,7 @@ public class KurtiSqlLentele {
 	/**
 	 * Sukuria Lentele klasės kintamąjį
 	 */
-	private Lentele lentele;
+	private LenteleSuDuomenimis lentele;
 	/**
 	 * Tuščias konstruktorius
 	 */
@@ -28,20 +28,20 @@ public class KurtiSqlLentele {
 	/**
 	 * Konstruktoriui perduodami Lentele class tipo duomenys
 	 */
-	public KurtiSqlLentele(Lentele lentele) {
+	public KurtiSqlLentele(LenteleSuDuomenimis lentele) {
 		
 		this.lentele = lentele;
 	}
 	/**
-	 * metodas ivykdyti sql uzklausa ir sudaryti lentele duombazeje
+	 * String tipo kintamasis SQL uzklausai lenteles duombazeje sudarymui
 	 */
-	public String Vykdyti() {
+	public String Kurti() {
 
 		String sql_lent = "";
 		String data_type = "";
 		String kablelis = "";
-		String primary_key = " PRIMARY KEY";
-		sql_lent = "CREATE TABLE demo." + this.lentele.getLenteles_pav() + "(";
+		String primary_key = " AUTO_INCREMENT PRIMARY KEY";
+		sql_lent = "CREATE TABLE `" + this.lentele.getLenteles_pav() + "`(";
 		for (int i = 0; i < this.lentele.getStulpeliu_pav().size(); i++) {
 			
 			switch(this.lentele.getStulpeliu_tipai().get(i)) {
@@ -49,23 +49,50 @@ public class KurtiSqlLentele {
 					data_type = "varchar(256)";
 					break;
 				case("Integer"):
-					data_type = "int(10)";
+					data_type = "int(10) UNSIGNED";
 					break;
 				case("Double"):
-					data_type = "double";
+					data_type = "double UNSIGNED";
 					break;
 				case("Boolean"):
-					data_type = "tinyint(4)";
+					data_type = "tinyint(4) None UNSIGNED";
 					break;
 				default:
 					data_type = "text";
 			}
-			sql_lent += kablelis + " " + lentele.getStulpeliu_pav().get(i) + " " + data_type + primary_key;
+			sql_lent += kablelis + " `" + lentele.getStulpeliu_pav().get(i) + "` " + data_type + primary_key;
 			primary_key = "";
 			kablelis = ",";
 		}
 		sql_lent += ");";
-		System.out.println ( sql_lent );
 		return sql_lent;
-	}//end Vykdyti()
-}
+	}//end Kurti()
+	/**
+	 * String tipo kintamasis SQL uzklausai lenteles duomenu duombazeje papildymui
+	 */
+	public String Papildyti() {
+		String sql_lent = "";
+		String kablelis = "";
+		sql_lent += "INSERT INTO `" + this.lentele.getLenteles_pav();
+		sql_lent += "`(";
+		for (int i = 0; i < this.lentele.getStulpeliu_pav().size(); i++) {
+			sql_lent += kablelis + " `" + this.lentele.getStulpeliu_pav().get(i) + "`";
+			kablelis = ",";
+		}
+		sql_lent += " )\n";
+		sql_lent += "VALUES\n";
+		String kablelis2 = "";
+		for (int i = 0; i < this.lentele.getDuomenu_eiluciu_skaicius(); i++) {
+			kablelis = "";
+			sql_lent += kablelis2 + "(";
+			for(int z = 0; z < this.lentele.getStulpeliu_pav().size(); z++) {
+				sql_lent += kablelis + "'" + this.lentele.getLent_duomenys().get(i).get(z) + "'";
+				kablelis = ", ";
+			}
+			sql_lent += ")";
+			kablelis2 = ",\n";
+		}
+		sql_lent += ";";
+		return sql_lent;
+	}//end Papildyti()
+}//end class KurtiSqlLentele()

@@ -9,7 +9,7 @@ public class RasymasFaile2 extends RasymasFaile {
 
 	public RasymasFaile2(String vardas_failo) {
 		
-		super();
+		super(vardas_failo);
 	}
 
 	public void iEilutes ( ArrayList<String> zodziai ) {

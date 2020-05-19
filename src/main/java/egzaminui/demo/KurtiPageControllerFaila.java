@@ -2,18 +2,19 @@ package egzaminui.demo;
 import java.util.ArrayList;
 import org.springframework.util.StringUtils;
 
-
 public class KurtiPageControllerFaila {
 	
-	private ArrayList<Lentele> lenteles;
+	private ArrayList<LenteleSuDuomenimis> lenteles;
+	private LenteleBeDuomenu lentele;
 	
 	public KurtiPageControllerFaila() {
 		
 	}
 	
-	public KurtiPageControllerFaila(ArrayList<Lentele> lenteles) {
+	public KurtiPageControllerFaila(ArrayList<LenteleSuDuomenimis> lenteles, LenteleBeDuomenu ataskaitos_lentele) {
 		
 		this.lenteles = lenteles;
+		this.lentele = ataskaitos_lentele;
 		
 	}
 	public ArrayList<String> JavaFailui() {
@@ -62,6 +63,41 @@ public class KurtiPageControllerFaila {
 		JavaFailui.add("		return \"index\";");
 		JavaFailui.add("	}");
 		JavaFailui.add("	");
+		JavaFailui.add("	@RequestMapping(path=\"" + (char)47 + this.lentele.getLenteles_pav() + "\", method={ RequestMethod.GET, RequestMethod.POST })");
+		JavaFailui.add("    public String " + this.lentele.getLenteles_pav() + "(");
+		String stulpeliu_sarasas = "";
+		kablelis = "";
+		for( int i=0; i < this.lentele.getKiekis_stulpeliu(); i++ ) {
+
+			JavaFailui.add("    		" + kablelis + " @RequestParam(name=\"" + this.lentele.getStulpeliu_pav().get(i) + "\", required=false, defaultValue=\"\") " + this.lentele.getStulpeliu_tipai().get(i) + " " + this.lentele.getStulpeliu_pav().get(i));
+			stulpeliu_sarasas += kablelis + " " + this.lentele.getStulpeliu_pav().get(i);
+			kablelis = ",";
+		}
+		JavaFailui.add("    		, @RequestParam(name=\"veiksmas\", required=false, defaultValue=\"neieskoti\") String veiksmas");
+		JavaFailui.add("    		, Model model ");
+		JavaFailui.add("    	) {");
+		JavaFailui.add("        ");
+		JavaFailui.add("		BackEndMessage back_end_message = new BackEndMessage ( \"nieko dar neveikem\", false, \"pranesimas_grey\" );");
+		JavaFailui.add("		");
+		JavaFailui.add("        if ( veiksmas.equals(\"ieskoti\") ) {");
+		JavaFailui.add("        	");
+		JavaFailui.add("			Session session = this.sessionFactory().openSession();");
+		JavaFailui.add("        	");
+		JavaFailui.add("        	KurtiSqlUzklausai sql_uzklausa =  new KurtiSqlUzklausai ( session );");
+		JavaFailui.add("			model.addAttribute( \"sql_ataskaitai\", sql_uzklausa.paieskosLentele(" + stulpeliu_sarasas + " ));");
+		JavaFailui.add("        ");
+		JavaFailui.add("        	} else {");
+		JavaFailui.add("        		");
+		JavaFailui.add("    			model.addAttribute( \"sql_ataskaitai\", new ArrayList<PaieskosLentele>() );");
+		JavaFailui.add("        	}");
+		JavaFailui.add("        	");
+		JavaFailui.add("        model.addAttribute( \"back_end_message\", back_end_message );");
+		JavaFailui.add("        model.addAttribute( \"lst_menu\", Menu.values() ); ");
+		JavaFailui.add("        //model.addAttribute( \"lst\", " + lenteles.get(0).getLenteles_pav() + "_rep.findAll() );");
+		JavaFailui.add("        ");
+		JavaFailui.add("        return \"" + this.lentele.getLenteles_pav() + "\";");
+		JavaFailui.add("    }");
+		JavaFailui.add("	");	
 		for( int i=0; i < lenteles.size(); i++ ) {
 			kablelis = "";
 			JavaFailui.add("	@RequestMapping(path=\"" + (char)47 + lenteles.get(i).getLenteles_pav() + "\", method={ RequestMethod.GET, RequestMethod.POST })");
@@ -89,7 +125,7 @@ public class KurtiPageControllerFaila {
 			JavaFailui.add("        		");
 			JavaFailui.add("        	} else {*/");
 			JavaFailui.add("        		");
-			String stulpeliu_sarasas = "";
+			stulpeliu_sarasas = "";
 			kablelis = "";
 			for(int y=0; y < lenteles.get(i).getKiekis_stulpeliu(); y++) {
 				stulpeliu_sarasas += kablelis + " " + lenteles.get(i).getStulpeliu_pav().get(y);
@@ -133,7 +169,7 @@ public class KurtiPageControllerFaila {
 			JavaFailui.add("        model.addAttribute( \"lst_menu\", Menu.values() ); ");
 			JavaFailui.add("        model.addAttribute( \"lst\", " + lenteles.get(i).getLenteles_pav() + "_rep.findAll() );");
 			JavaFailui.add("        ");
-			JavaFailui.add("        return " + lenteles.get(i).getLenteles_pav() + ";");
+			JavaFailui.add("        return \"" + lenteles.get(i).getLenteles_pav() + "\";");
 			JavaFailui.add("    }");
 			JavaFailui.add("	");
 		}

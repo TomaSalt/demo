@@ -6,13 +6,13 @@ import org.springframework.util.StringUtils;
 
 public class KurtiJavaFaila {
 	
-	private Lentele lentele;
+	private LenteleSuDuomenimis lentele;
 		
 	public KurtiJavaFaila() {
 		
 	}
 
-	public KurtiJavaFaila(Lentele lentele) {
+	public KurtiJavaFaila(LenteleSuDuomenimis lentele) {
 		
 		this.lentele = lentele;
 		

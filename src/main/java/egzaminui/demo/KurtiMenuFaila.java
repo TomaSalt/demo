@@ -9,15 +9,17 @@ import org.springframework.util.StringUtils;
 @Component
 public class KurtiMenuFaila {
 	
-	private ArrayList<Lentele> lenteles;
+	private ArrayList<LenteleSuDuomenimis> lenteles;
+	private LenteleBeDuomenu lentele;
 	
 	public KurtiMenuFaila() {
 		
 	}
 		
-	public KurtiMenuFaila(ArrayList<Lentele>lenteles) {
+	public KurtiMenuFaila(ArrayList<LenteleSuDuomenimis>lenteles, LenteleBeDuomenu lentele) {
 		
 		this.lenteles = lenteles;
+		this.lentele = lentele;
 		
 	}
 	
@@ -33,10 +35,11 @@ public class KurtiMenuFaila {
 			if (i == (lenteles.size()-1)) {
 				kabliataskis = ";";
 			}
-			JavaFailui.add("	" + kablelis + StringUtils.capitalize(this.lenteles.get(i).getLenteles_pav()) + "(\"/" + this.lenteles.get(i).getLenteles_pav() + "\", \"" + StringUtils.capitalize(this.lenteles.get(i).getLenteles_pav()) + "\")" + kabliataskis);
+			JavaFailui.add("	" + kablelis + StringUtils.capitalize(this.lenteles.get(i).getLenteles_pav()) + "(\"/" + this.lenteles.get(i).getLenteles_pav() + "\", \"" + StringUtils.capitalize(this.lenteles.get(i).getLenteles_pav()) + "\")");
 			kablelis = ", ";
 
 		}
+		JavaFailui.add("	" + kablelis + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "(\"/" + this.lentele.getLenteles_pav() + "\", \"" + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "\")" + kabliataskis);
 		JavaFailui.add("");
 		JavaFailui.add("	private final String itemurl;");
 		JavaFailui.add("	private final String naujasPavadinimas;");

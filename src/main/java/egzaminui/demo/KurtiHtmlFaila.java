@@ -13,9 +13,13 @@ import org.springframework.util.StringUtils;
 
 public class KurtiHtmlFaila {
 	/**
-	 * Sukuria Lentele klasės kintamąjį
+	 * Sukuria LenteleSuDuomenimis klasės kintamąjį
 	 */
-	private Lentele lentele;
+	private LenteleSuDuomenimis lentele;
+	/**
+	 * Sukuria LenteleBeDuomenu klasės kintamąjį
+	 */
+	private LenteleBeDuomenu lent;
 	/**
 	 * Tuščias konstruktorius
 	 */
@@ -23,11 +27,18 @@ public class KurtiHtmlFaila {
 	
 	}
 	/**
-	 * Konstruktoriui perduodami Lentele class tipo duomenys
+	 * Konstruktoriui perduodami LenteleSu class tipo duomenys
 	 */
-	public KurtiHtmlFaila(Lentele lentele) {
+	public KurtiHtmlFaila(LenteleSuDuomenimis lentele) {
 		
 		this.lentele = lentele;
+	}
+	/**
+	 * Konstruktoriui perduodami Lentele class tipo duomenys
+	 */
+	public KurtiHtmlFaila(LenteleBeDuomenu lentele) {
+		
+		this.lent = lentele;
 	}
 	/**
 	 * Papildomas String sąrašo tipo kintamasis duomenimis

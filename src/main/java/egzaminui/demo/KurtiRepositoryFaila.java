@@ -4,12 +4,12 @@ import org.springframework.util.StringUtils;
 
 public class KurtiRepositoryFaila {
 	
-	private Lentele lentele;
+	private LenteleSuDuomenimis lentele;
 	
 	public KurtiRepositoryFaila() {
 	
 	}
-	public KurtiRepositoryFaila(Lentele lentele) {
+	public KurtiRepositoryFaila(LenteleSuDuomenimis lentele) {
 		
 		this.lentele = lentele;
 		
