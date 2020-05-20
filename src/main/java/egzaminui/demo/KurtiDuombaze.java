@@ -1,39 +1,64 @@
 package egzaminui.demo;
-//STEP 1. Import required packages
+
 import java.sql.*;
 import java.util.ArrayList;
+/**
+ * Failas, skirtas kurti duombazei pagal lentelių duomenis
+ * 
+ * @author Toma
+ *
+ */
 public class KurtiDuombaze {
-
+	/**
+	 * Sukuria String tipo kintamąjį nurodyti driver
+	 */
 	// JDBC driver name and database URL
-	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
+	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+	/**
+	 * Sukuria String tipo kintamąjį nurodyti duombazės adresą
+	 */
 	static String DB_URL = "jdbc:mysql://localhost:3306/";
-	
-	//  Database credentials
+	/**
+	 * Sukuria String tipo kintamąjį nurodyti vartotoją
+	 */
 	static final String USER = "root";
+	/**
+	 * Sukuria String tipo kintamąjį nurodyti slaptažodį
+	 */
 	static final String PASS = "";
-	private String database_name;
+	/**
+	 * Sukuria String tipo kintamąjį nurodyti duombazės vardą
+	 */
+	private String database_name;	
+	/**
+	 * Sukuria LenteleSuDuomenimis klasės sąrašo tipo kintamąjį lentelių duomenims
+	 */
 	ArrayList<LenteleSuDuomenimis> lenteles;
-   
+	/**
+	 * Konstruktoriui perduodamas duombazės pavadinimas ir LenteleSuDuomenimis klasės sąrašo tipo duomenys, reikalingi kurti duombazę
+	 */
 	public KurtiDuombaze(String name, ArrayList<LenteleSuDuomenimis> lenteles) {
 	   
 		this.database_name = name;
 		this.lenteles = lenteles;
 	}
-   
-	public void Kurti() {
+	/**
+	 * Metodas sukurti ryšį su duombaze ir sukurti duombazę
+	 */
+	public void kurti() {
 		
 		Connection conn = null;
 		Statement stmt = null;
 		String sql_lent = "";
 	   
 		try{
-			//STEP 2: Register JDBC driver
+			//STEP 1: Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");
-			//STEP 3: Open a connection
+			//STEP 2: Open a connection
 			System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 	
-			//STEP 4: Execute a query
+			//STEP 3: Execute a query
 			System.out.println("Creating database...");
 			stmt = conn.createStatement();
 	      
@@ -61,26 +86,26 @@ public class KurtiDuombaze {
 			}catch(SQLException se){
 				se.printStackTrace();
 			}
-		}//end finally try
+		}
 
 		DB_URL = "jdbc:mysql://localhost:3306/" + database_name;
 		try{
-			//STEP 5: Open a connection
+			// STEP 4: Open a connection
 			System.out.println("Connecting to database " + database_name + "...");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 		
-			//STEP 6: Execute queries
+			//STEP 5: Execute queries
 			stmt = conn.createStatement();
 			for (int i = 0; i < lenteles.size(); i++) {
 				System.out.println("Creating table...");
 				KurtiSqlLentele sql_lentele = new KurtiSqlLentele(lenteles.get(i));
 				//sql_lent = "USE " + database_name + ";\n";
-				sql_lent = sql_lentele.Kurti();
+				sql_lent = sql_lentele.kurti();
 				System.out.println(sql_lent);
 				stmt.executeUpdate(sql_lent);
 				System.out.println("Table created successfully...\n");
 				
-				sql_lent = sql_lentele.Papildyti();
+				sql_lent = sql_lentele.papildyti();
 				System.out.println(sql_lent);
 				stmt.executeUpdate(sql_lent);
 				System.out.println("Table updated successfully...\n");
@@ -103,8 +128,8 @@ public class KurtiDuombaze {
 					conn.close();
 			}catch(SQLException se){
 				se.printStackTrace();
-			}//end finally try
-		}//end try
+			}
+		}
 		System.out.println("Goodbye!");
-	}//end Kurti()
-}//end KurtiDuombaze
+	}
+}

@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import org.springframework.util.StringUtils;
 
 /**
- * Failas, skirtas sukurti lentele duomenu bazeje, įvesti pagal lentelės duomenis
+ * Failas, skirtas sukurti lentele duomenu bazeje pagal lentelės duomenis
  * 
  * @author Toma
  *
  */
 public class KurtiSqlLentele {
-
 	/**
 	 * Sukuria Lentele klasės kintamąjį
 	 */
@@ -26,7 +25,7 @@ public class KurtiSqlLentele {
 
 	}
 	/**
-	 * Konstruktoriui perduodami Lentele class tipo duomenys
+	 * Konstruktoriui perduodami LenteleSuDuomenimis class tipo duomenys
 	 */
 	public KurtiSqlLentele(LenteleSuDuomenimis lentele) {
 		
@@ -34,8 +33,9 @@ public class KurtiSqlLentele {
 	}
 	/**
 	 * String tipo kintamasis SQL uzklausai lenteles duombazeje sudarymui
+	 * @return sql_lent
 	 */
-	public String Kurti() {
+	public String kurti() {
 
 		String sql_lent = "";
 		String data_type = "";
@@ -66,11 +66,13 @@ public class KurtiSqlLentele {
 		}
 		sql_lent += ");";
 		return sql_lent;
-	}//end Kurti()
+	}
 	/**
 	 * String tipo kintamasis SQL uzklausai lenteles duomenu duombazeje papildymui
+	 * @return sql_lent
 	 */
-	public String Papildyti() {
+	public String papildyti() {
+		
 		String sql_lent = "";
 		String kablelis = "";
 		sql_lent += "INSERT INTO `" + this.lentele.getLenteles_pav();
@@ -94,5 +96,5 @@ public class KurtiSqlLentele {
 		}
 		sql_lent += ";";
 		return sql_lent;
-	}//end Papildyti()
-}//end class KurtiSqlLentele()
+	}
+}
