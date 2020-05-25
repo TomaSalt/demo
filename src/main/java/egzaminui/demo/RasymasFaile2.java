@@ -3,15 +3,23 @@ package egzaminui.demo;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
-
+/**
+ * Class tipo failas, skirtas duomenų įrašymui į failą su pagalbiniais priedais, kuris paveldi RasymasFaile
+ * 
+ * @author Toma
+ *
+ */
 public class RasymasFaile2 extends RasymasFaile {
-	
-
+	/**
+	 * Konstruktoriui perduodamas failo vardas
+	 */
 	public RasymasFaile2(String vardas_failo) {
 		
 		super(vardas_failo);
 	}
-
+	/**
+	 * Metodas įrašymui į failą po eilutę su papildomu pagalbiniu tekstu
+	 */
 	public void iEilutes ( ArrayList<String> zodziai ) {
 		
 		try  {
@@ -20,7 +28,7 @@ public class RasymasFaile2 extends RasymasFaile {
 
 			for ( String value : zodziai ) { 
 						
-				bw.write ("JavaFailui.add(\"" + value + "\");\n");
+				bw.write ("java_failui.add(\"" + value + "\");\n");
 			}
 			bw.close();
 					

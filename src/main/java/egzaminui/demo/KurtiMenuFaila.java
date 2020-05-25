@@ -18,9 +18,9 @@ public class KurtiMenuFaila {
 	 */
 	private ArrayList<LenteleBeDuomenu> lenteles;
 	/**
-	 * Sukuria dar vieną LenteleBeDuomenu klasės sąrašo tipo kintamąjį ataskaitos lentelių
+	 * Sukuria dar vieną LenteleBeDuomenu klasės sąrašo tipo kintamąjį paieskos lentelių
 	 */
-	private ArrayList<LenteleBeDuomenu> ataskaitos_lenteles;
+	private ArrayList<LenteleBeDuomenu> paieskos_lenteles;
 	/**
 	 * Tuščias konstruktorius
 	 */
@@ -30,10 +30,10 @@ public class KurtiMenuFaila {
 	/**
 	 * Konstruktoriui perduodami LenteleBeDuomenu klasės sąrašo tipo duomenys, reikalingi menu failo sudarymui
 	 */
-	public KurtiMenuFaila(ArrayList<LenteleBeDuomenu> lenteles, ArrayList<LenteleBeDuomenu> ataskaitos_lenteles) {
+	public KurtiMenuFaila(ArrayList<LenteleBeDuomenu> lenteles, ArrayList<LenteleBeDuomenu> paieskos_lenteles) {
 		
 		this.lenteles = lenteles;
-		this.ataskaitos_lenteles = ataskaitos_lenteles;
+		this.paieskos_lenteles = paieskos_lenteles;
 		
 	}	
 	/**
@@ -46,39 +46,52 @@ public class KurtiMenuFaila {
 		String kabliataskis = "";
 		ArrayList<String> java_failui = new ArrayList<String>();
 		java_failui.add("package egzaminui.demo;");
-		java_failui.add("");
+		java_failui.add("/**");
+		java_failui.add(" * Failas, skirtas Menu klasės duomenims įvesti pagal lentelių pavadinimus");
+		java_failui.add(" *");
+		java_failui.add(" * @author ");
+		java_failui.add(" *");
+		java_failui.add(" */");
 		java_failui.add("public enum Menu {");
 		java_failui.add("");
 		for (int i = 0; i < lenteles.size(); i++) {
-			if (i == ( lenteles.size()-1 ) && ataskaitos_lenteles.size() == 0 ) {
+			if (i == ( lenteles.size()-1 ) && paieskos_lenteles.size() == 0 ) {
 				kabliataskis = ";";
 			}
 			java_failui.add("	" + kablelis + StringUtils.capitalize(lenteles.get(i).getLenteles_pav()) + "(\"/" + lenteles.get(i).getLenteles_pav() + "\", \"" + StringUtils.capitalize(lenteles.get(i).getLenteles_pav()) + "\")" + kabliataskis);
 			kablelis = ", ";
 
 		}
-		for (int i = 0; i < ataskaitos_lenteles.size(); i++) {
+		for (int i = 0; i < paieskos_lenteles.size(); i++) {
 			
-			if (i == (ataskaitos_lenteles.size()-1)) {
+			if (i == (paieskos_lenteles.size()-1)) {
 				kabliataskis = ";";
 			}
-			java_failui.add("	" + kablelis + StringUtils.capitalize(ataskaitos_lenteles.get(i).getLenteles_pav()) + "(\"/" + ataskaitos_lenteles.get(i).getLenteles_pav() + "\", \"" + StringUtils.capitalize(ataskaitos_lenteles.get(i).getLenteles_pav()) + "\")" + kabliataskis);
+			java_failui.add("	" + kablelis + StringUtils.capitalize(paieskos_lenteles.get(i).getLenteles_pav()) + "(\"/" + paieskos_lenteles.get(i).getLenteles_pav() + "\", \"" + StringUtils.capitalize(paieskos_lenteles.get(i).getLenteles_pav()) + "\")" + kabliataskis);
 			kablelis = ", ";
 
 		}
 		java_failui.add("");
 		java_failui.add("	private final String itemurl;");
 		java_failui.add("	private final String naujasPavadinimas;");
-		java_failui.add("");              
+		java_failui.add("/**");
+		java_failui.add(" * Konstruktoriui perduodami String tipo url adresas ir pavadinimas");
+		java_failui.add(" */");         
 		java_failui.add("	Menu( String url, String pavadinimas ) {");
 		java_failui.add("		this.itemurl = url;");
 		java_failui.add("		this.naujasPavadinimas = pavadinimas;");
 		java_failui.add("	}");
-		java_failui.add("");
+		java_failui.add("/**");
+		java_failui.add(" * String tipo kintamasis itemurl");
+		java_failui.add(" * @return this.itemurl");
+		java_failui.add(" */");
 		java_failui.add("	public String itemurl() {");
 		java_failui.add("		return this.itemurl;");
 		java_failui.add("	}");
-		java_failui.add("");
+		java_failui.add("/**");
+		java_failui.add(" * String tipo kintamasis naujasPavadinimas");
+		java_failui.add(" * @return this.naujasPavadinimas");
+		java_failui.add(" */");
 		java_failui.add("	public String naujasPavadinimas() {");
 		java_failui.add("		return this.naujasPavadinimas;");
 		java_failui.add("	}");

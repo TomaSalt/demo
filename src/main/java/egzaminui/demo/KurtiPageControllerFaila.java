@@ -9,12 +9,18 @@ import org.springframework.util.StringUtils;
  *
  */
 public class KurtiPageControllerFaila {
-
+	/**
+	 * Sukuria dar vieną LenteleBeDuomenu klasės sąrašo tipo kintamąjį paieškos lentelių duomenims
+	 */
 	private ArrayList<LenteleBeDuomenu> lenteles;
 	/**
 	 * Sukuria dar vieną LenteleBeDuomenu klasės sąrašo tipo kintamąjį paieškos lentelių duomenims
 	 */
 	private ArrayList<LenteleBeDuomenu> paieskos_lenteles;
+	/**
+	 * Sukuria dar vieną LenteleBeDuomenu klasės sąrašo tipo kintamąjį ataskaitos lentelių duomenims
+	 */
+	private ArrayList<LenteleBeDuomenu> ataskaitos_lenteles;
 	/**
 	 * Tuščias konstruktorius
 	 */
@@ -24,10 +30,11 @@ public class KurtiPageControllerFaila {
 	/**
 	 * Konstruktoriui perduodami LenteleBeDuomenu klasės sąrašo tipo duomenys, reikalingi PageController failo sudarymui
 	 */
-	public KurtiPageControllerFaila(ArrayList<LenteleBeDuomenu> lenteles, ArrayList<LenteleBeDuomenu> paieskos_lenteles) {
+	public KurtiPageControllerFaila(ArrayList<LenteleBeDuomenu> lenteles, ArrayList<LenteleBeDuomenu> paieskos_lenteles, ArrayList<LenteleBeDuomenu> ataskaitos_lenteles) {
 		
 		this.lenteles = lenteles;
 		this.paieskos_lenteles = paieskos_lenteles;
+		this.ataskaitos_lenteles = ataskaitos_lenteles;
 		
 	}
 	/**
@@ -89,10 +96,10 @@ public class KurtiPageControllerFaila {
 			java_failui.add("	@RequestMapping(path=\"" + (char)47 + paieskos_lenteles.get(i).getLenteles_pav() + "\", method={ RequestMethod.GET, RequestMethod.POST })");
 			java_failui.add("    public String " + paieskos_lenteles.get(i).getLenteles_pav() + "(");
 			kablelis = "";
-			for( int y=0; y < paieskos_lenteles.get(i).getKiekis_stulpeliu(); i++ ) {
+			for( int y=0; y < paieskos_lenteles.get(i).getKiekis_stulpeliu(); y++ ) {
 	
-				java_failui.add("    		" + kablelis + " @RequestParam(name=\"" + paieskos_lenteles.get(i).getStulpeliu_pav().get(i) + "\", required=false, defaultValue=\"\") " + paieskos_lenteles.get(i).getStulpeliu_tipai().get(i) + " " + paieskos_lenteles.get(i).getStulpeliu_pav().get(i));
-				stulpeliu_sarasas += kablelis + " " + paieskos_lenteles.get(i).getStulpeliu_pav().get(i);
+				java_failui.add("    		" + kablelis + " @RequestParam(name=\"" + paieskos_lenteles.get(i).getStulpeliu_pav().get(y) + "\", required=false, defaultValue=\"\") " + paieskos_lenteles.get(i).getStulpeliu_tipai().get(y) + " " + paieskos_lenteles.get(i).getStulpeliu_pav().get(y));
+				stulpeliu_sarasas += kablelis + " " + paieskos_lenteles.get(i).getStulpeliu_pav().get(y);
 				kablelis = ",";
 			}
 			java_failui.add("    		, @RequestParam(name=\"veiksmas\", required=false, defaultValue=\"neieskoti\") String veiksmas");
@@ -105,12 +112,12 @@ public class KurtiPageControllerFaila {
 			java_failui.add("        	");
 			java_failui.add("			Session session = this.sessionFactory().openSession();");
 			java_failui.add("        	");
-			java_failui.add("        	KurtiSqlUzklausai sql_uzklausa =  new KurtiSqlUzklausai ( session );");
-			java_failui.add("			model.addAttribute( \"sql_ataskaitai\", sql_uzklausa.paieskosLentele(" + stulpeliu_sarasas + " ));");
+			java_failui.add("        	" + StringUtils.capitalize(this.paieskos_lenteles.get(i).getLenteles_pav()) + " sql_uzklausa =  new " + StringUtils.capitalize(this.paieskos_lenteles.get(i).getLenteles_pav()) + " ( session );");
+			java_failui.add("			model.addAttribute( \"sql_ataskaitai\", sql_uzklausa.ataskaitosLentele(" + stulpeliu_sarasas + " ));");
 			java_failui.add("        ");
 			java_failui.add("        	} else {");
 			java_failui.add("        		");
-			java_failui.add("    			model.addAttribute( \"sql_ataskaitai\", new ArrayList<PaieskosLentele>() );");
+			java_failui.add("    			model.addAttribute( \"sql_ataskaitai\", new ArrayList<" + StringUtils.capitalize(this.ataskaitos_lenteles.get(i).getLenteles_pav()) + ">() );");
 			java_failui.add("        	}");
 			java_failui.add("        	");
 			java_failui.add("        model.addAttribute( \"back_end_message\", back_end_message );");

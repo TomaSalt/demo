@@ -45,6 +45,7 @@ public class KurtiRepositoryFaila {
 		java_failui.add("public interface " + StringUtils.capitalize(lentele.getLenteles_pav()) + "Repository extends CrudRepository<" + StringUtils.capitalize(lentele.getLenteles_pav()) + ", Integer>{");
 		java_failui.add("");
 		java_failui.add("	//List<" + StringUtils.capitalize(lentele.getLenteles_pav()) + ">findBy" + StringUtils.capitalize(lentele.getStulpeliu_pav().get(1)) + "( " + lentele.getStulpeliu_tipai().get(1) + " " + lentele.getStulpeliu_pav().get(1) + " );");
+		java_failui.add("	" + StringUtils.capitalize(lentele.getLenteles_pav()) + " findBy" + StringUtils.capitalize(lentele.getStulpeliu_pav().get(1)) + "(" + lentele.getStulpeliu_tipai().get(1) + " " + lentele.getStulpeliu_pav().get(1) + " );");
 		java_failui.add("");
 		String select_stulpeliu_pav = "";
 		String kablelis = "";

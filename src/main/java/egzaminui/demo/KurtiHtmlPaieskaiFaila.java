@@ -8,23 +8,28 @@ import org.springframework.util.StringUtils;
  * @author Toma
  *
  */
-public class KurtiHtmlFaila {
+public class KurtiHtmlPaieskaiFaila {
 	/**
-	 * Sukuria LenteleBeDuomenu klasės kintamąjį
+	 * @param ataskaitos_lentele LenteleBeDuomenu klasės kintamasis ataskaitos lentelei
+	 */
+	private LenteleBeDuomenu ataskaitos_lentele;
+	/**
+	 * @param lentele LenteleBeDuomenu klasės kintamasis paieškos lentelei
 	 */
 	private LenteleBeDuomenu lentele;
 	/**
 	 * Tuščias konstruktorius
 	 */
-	public KurtiHtmlFaila() {
+	public KurtiHtmlPaieskaiFaila() {
 	
 	}
 	/**
 	 * Konstruktoriui perduodami LenteleBeDuomenu klasės tipo duomenys
 	 */
-	public KurtiHtmlFaila(LenteleBeDuomenu lentele) {
+	public KurtiHtmlPaieskaiFaila(LenteleBeDuomenu lentele, LenteleBeDuomenu ataskaitos_lentele) {
 		
 		this.lentele = lentele;
+		this.ataskaitos_lentele = ataskaitos_lentele;
 	}
 	/**
 	 * Papildomas String sąrašo tipo kintamasis duomenimis
@@ -51,7 +56,7 @@ public class KurtiHtmlFaila {
 		html_failui.add("	<script>");
 		html_failui.add("		$( function() {");
 		html_failui.add("			var dialog, form,");
-		for (int i = 1; i < this.lentele.getStulpeliu_pav().size(); i++) {
+		for (int i = 0; i < this.lentele.getStulpeliu_pav().size(); i++) {
 			html_failui.add("			" + this.lentele.getStulpeliu_pav().get(i) + " = $(\"#" + this.lentele.getStulpeliu_pav().get(i) + "\"),");
 			visi_laukai += ".add( " + this.lentele.getStulpeliu_pav().get(i) + " )";
 		}
@@ -100,11 +105,11 @@ public class KurtiHtmlFaila {
 		html_failui.add("					return true;");
 		html_failui.add("				}");
 		html_failui.add("			}");
-		html_failui.add("			function addElement() {");
+		html_failui.add("			function searchElement() {");
 		html_failui.add("			");	
 		html_failui.add("				var valid = true;");
 		html_failui.add("				allFields.removeClass( \"ui-state-error\" );");
-		for (int i = 1; i < this.lentele.getStulpeliu_pav().size(); i++) {
+		for (int i = 0; i < this.lentele.getStulpeliu_pav().size(); i++) {
 			if( this.lentele.getStulpeliu_tipai().get(i).equals("String") ) {
 				html_failui.add("				valid = valid && checkLength( " + this.lentele.getStulpeliu_pav().get(i) + ", \"" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "\", 1, 30 );");
 			}
@@ -112,9 +117,9 @@ public class KurtiHtmlFaila {
 				html_failui.add("				valid = valid && checkNumber( " + this.lentele.getStulpeliu_pav().get(i) + ", \"" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "\", 0, 1000 );");
 			}
 		}
-		html_failui.add("				// valid = valid && checkRegexp( " + this.lentele.getStulpeliu_pav().get(1) + ", /^[a-z]([0-9a-z_\\s])+$/i, \"product may consist of a-z, 0-9, underscores, spaces and must begin with a letter.\");");
+		html_failui.add("				// valid = valid && checkRegexp( " + this.lentele.getStulpeliu_pav().get(0) + ", /^[a-z]([0-9a-z_\\s])+$/i, \"product may consist of a-z, 0-9, underscores, spaces and must begin with a letter.\");");
 		html_failui.add("				if ( valid ) {");
-		html_failui.add("					alert ( 'Submiting '  + " + this.lentele.getStulpeliu_pav().get(1)+ ".val() );"); 
+		html_failui.add("					alert ( 'Submiting '  + " + this.lentele.getStulpeliu_pav().get(0)+ ".val() );"); 
 		html_failui.add("					$( '#element_forma' ).submit();");	
 		html_failui.add("					dialog.dialog( \"close\" );");	
 		html_failui.add("				}");
@@ -127,7 +132,7 @@ public class KurtiHtmlFaila {
 		html_failui.add(" 				width: 350,");
 		html_failui.add("				modal: true,");
 		html_failui.add("				buttons: {");
-		html_failui.add("					\"Sukurti\": addElement,");
+		html_failui.add("					\"Ieškoti\": searchElement,");
 		html_failui.add("					Atšaukti: function() {");
 		html_failui.add("						dialog.dialog( \"close\" );");
 		html_failui.add("					}");
@@ -138,57 +143,11 @@ public class KurtiHtmlFaila {
 		html_failui.add("				}");
 		html_failui.add("			});");
 		html_failui.add("			form = dialog.find( \"form\" );");
-		html_failui.add("			trintidialog = $( \"#dialog-confirm\" ).dialog({");
+		html_failui.add("			$( \"#search-element\" ).button().on( \"click\", function() {");
 		html_failui.add("			");	
-		html_failui.add("				autoOpen: false,");
-		html_failui.add("				resizable: false,");
-		html_failui.add("				height: \"auto\",");
-		html_failui.add("				width: 400,");
-		html_failui.add("				modal: true,");
-		html_failui.add("				buttons: {");
-		html_failui.add("					\"Ištrinti įrašą\": function() {");
-		html_failui.add("						$( '#salinimo_forma' ).submit();");
-		html_failui.add("						$( this ).dialog( \"close\" );");
-		html_failui.add("					},");
-		html_failui.add("					Atšaukti: function() {");
-		html_failui.add("						$( this ).dialog( \"close\" );");
-		html_failui.add("					}");
-		html_failui.add("				}");
-		html_failui.add("			});");
-		html_failui.add("			$( \"#create-element\" ).button().on( \"click\", function() {");
-		html_failui.add("			");	
-		html_failui.add("				$( '#pav_veiksmo' ).html ( 'Kuriamas naujas įrašas' );");
-		html_failui.add("				$( '#veiksmas' ).val ( 'papildyti' );");
-		html_failui.add("				dialog.dialog( \"open\" );");
-		html_failui.add("			});");
-		html_failui.add("		");
-		html_failui.add("			$( \".keisti\" ).each ( function() {");
-		html_failui.add("			");
-		html_failui.add("				$( this ).on( \"click\", function() {");
-		html_failui.add("					id = $( this ).data( 'id' );");
-
-		for (int i = 1; i < this.lentele.getStulpeliu_pav().size(); i++) {
-			
-			html_failui.add("					$('#" + this.lentele.getStulpeliu_pav().get(i) + "').val( $( this ).data ( '" + this.lentele.getStulpeliu_pav().get(i) + "' ));");
-			
-		}
-		html_failui.add("					$( '#id_taisomo_iraso' ).val ( id );");
-		html_failui.add("					$( '#pav_veiksmo' ).html (  'Koreguojamas įrašas' );");
-		html_failui.add("					$( '#veiksmas' ).val ( 'pakeisti' );");
-/*		html_failui.add("					kilme = $( this ).data( 'kilme' );");
-		html_failui.add("					if ( kilme == 1){");
-		html_failui.add("					$('#kilme').prop('checked', true);}");*/
-		html_failui.add("					dialog.dialog( \"open\" );	");
-		html_failui.add("				});");
-		html_failui.add("			});");
-		html_failui.add("			$( \".salinti\" ).each ( function() {");
-		html_failui.add("		");
-		html_failui.add("				$( this ).on( \"click\", function() {");	
-		html_failui.add("					id = $( this ).data( 'id' );");
-		html_failui.add("					$( '#id_salinamo_iraso' ).val ( id );");
-		html_failui.add("					$( '#pav_salinamo_iraso' ).html ($( this ).data('" + this.lentele.getStulpeliu_pav().get(1) + "'));");
-		html_failui.add("					trintidialog.dialog( \"open\" );");
-		html_failui.add("				});");
+		html_failui.add("				$( '#pav_veiksmo' ).html ( 'Paieškos lentelė' );");
+		html_failui.add("				$( '#veiksmas' ).val ( 'ieskoti' );");
+		html_failui.add("				dialog.dialog( \"open\" );	");
 		html_failui.add("			});");
 		html_failui.add("		});");
 		html_failui.add("	</script>");
@@ -207,7 +166,7 @@ public class KurtiHtmlFaila {
 		html_failui.add("		<p id=\"pav_veiksmo\"></p>");
 		html_failui.add("		<form id=\"element_forma\" method=\"POST\">");
 		html_failui.add("			<fieldset>");
-		for (int i = 1; i < this.lentele.getStulpeliu_pav().size(); i++ ) {
+		for (int i = 0; i < this.lentele.getStulpeliu_pav().size(); i++ ) {
 			
 			html_failui.add("				<label for=\"" + this.lentele.getStulpeliu_pav().get(i) + "\">"+ this.lentele.getStulpeliu_pav().get(i) + "</label>");
 			if( this.lentele.getStulpeliu_tipai().get(i).equals("String")) {
@@ -221,65 +180,39 @@ public class KurtiHtmlFaila {
 			}
 		}
 		
-		html_failui.add("				<input type=\"hidden\" name=\"veiksmas\" id=\"veiksmas\" value=\"papildyti\">");
-		html_failui.add("				<input type=\"hidden\" name=\"id\" id=\"id_taisomo_iraso\" value=\"0\">");
-		//html_failui.add("				<input type=\"checkbox\" name=\"kilme\" id=\"kilme\" value=\"1\">");
-		//html_failui.add("				<label for=\"kilme\"> gyvulines kilmes </label><br>");
+		html_failui.add("				<input type=\"hidden\" name=\"veiksmas\" id=\"veiksmas\" value=\"neieskoti\">");
+		html_failui.add("				<!--<input type=\"checkbox\" name=\"checkbox\" id=\"checkbox\" value=\"1\">");
+		html_failui.add("				<label for=\"checkbox\"> checkbox </label><br>-->");
 		html_failui.add("				<input type=\"submit\" tabindex=\"-1\" style=\"position:absolute; top:-1000px\">");
 		html_failui.add("			</fieldset>");
 		html_failui.add("		</form>");
 		html_failui.add("	</div>");
 		html_failui.add("	<div id=\"main\">");
-		html_failui.add("		<h3>Esami " + this.lentele.getLenteles_pav() + "</h3>");
-		html_failui.add("		<button id=\"create-element\">Irašyti naują</button>");
+		html_failui.add("		<h3>" + this.lentele.getLenteles_pav() + "</h3>");
+		html_failui.add("		<button id=\"search-element\">Ieškoti</button>");
 		html_failui.add("		<table id=\"duombazes_lentele\">");
 		html_failui.add("			<thead>");
 		html_failui.add("			<tr>");
-		html_failui.add("				<th>Veiksmai</th>");
-		for (int i = 1; i < this.lentele.getStulpeliu_pav().size(); i++) {
+		for (int i = 0; i < this.ataskaitos_lentele.getStulpeliu_pav().size(); i++) {
 			
-			html_failui.add("				<th>" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "</th>");
+			html_failui.add("				<th>" + StringUtils.capitalize(this.ataskaitos_lentele.getStulpeliu_pav().get(i)) + "</th>");
 			
 		}
 		html_failui.add("			</tr>");
 		html_failui.add("			</thead>");
 		html_failui.add("			<tbody>");
-		html_failui.add("			<tr th:each=\"" + this.lentele.getLenteles_pav() + " : ${lst}\">");
-		html_failui.add("				<td>");
-		html_failui.add("					<input type=\"button\" class=\"keisti\" value=\"keisti\" id=\"keisti\"");
-		visi_laukai = "";
-		String kablelis = "";
-		for (int i = 0; i < this.lentele.getStulpeliu_pav().size(); i++) {
-			visi_laukai += kablelis + " data-" + this.lentele.getStulpeliu_pav().get(i) + "=${" + this.lentele.getLenteles_pav() + ".get" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "()}";
-			kablelis = ",";
-		}
-		html_failui.add("					th:attr=\"" + visi_laukai + "\">");
-		visi_laukai = "";
-		visi_laukai += "data-" + this.lentele.getStulpeliu_pav().get(0) + "=${" + this.lentele.getLenteles_pav() + ".get" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(0)) + "()}";
-		visi_laukai += kablelis + " data-" + this.lentele.getStulpeliu_pav().get(1) + "=${" + this.lentele.getLenteles_pav() + ".get" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(1)) + "()}";
-		html_failui.add("					<input type=\"button\" class=\"salinti\" value=\"šalinti\" id=\"salinti\" ");
-		html_failui.add("					th:attr=\"" + visi_laukai + "\">");
-		html_failui.add("				</td>");
+		html_failui.add("			<tr th:each=\"" + this.ataskaitos_lentele.getLenteles_pav() + " : ${lst}\">");
 		/*html_failui.add("				<td>");
 		html_failui.add("					<a th:href=\"@{/elementas(id=${elementas.getId()})}\" th:text=\"${elementas.getPav()}\"></a>");
 		html_failui.add("				</td>");*/
-		for (int i = 1; i < this.lentele.getStulpeliu_pav().size(); i++) {
-			html_failui.add("				<td th:text=\"${" + this.lentele.getLenteles_pav() + ".get" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "()}\"></td>");
+		for (int i = 0; i < this.ataskaitos_lentele.getStulpeliu_pav().size(); i++) {
+			html_failui.add("				<td th:text=\"${" + this.ataskaitos_lentele.getLenteles_pav() + ".get" + StringUtils.capitalize(this.ataskaitos_lentele.getStulpeliu_pav().get(i)) + "()}\"></td>");
 		}
 		/*html_failui.add("				<td th:text=\"${elementas.getKilme()}==1 ? 'gyvuline' : 'augaline'\">");
 		html_failui.add("				</td>");*/
 		html_failui.add("			</tr>");
 		html_failui.add("			</tbody>");
 		html_failui.add("		</table>");
-		html_failui.add("	</div>");
-		html_failui.add("	<div id=\"dialog-confirm\" title=\"Ištrinti įrašą?\">");
-		html_failui.add("		<p><span class=\"ui-icon ui-icon-alert\" style=\"float:left; margin:12px 12px 20px 0;\"></span>");
-		html_failui.add("		<p>Šis įrašas <span id=\"pav_salinamo_iraso\"></span> bus ištrintas ir nebus įmanoma jo atkurti. Ar tikrai norite ištrinti įrašą?</p>");
-		html_failui.add("		<form id=\"salinimo_forma\" method=\"POST\">");
-		html_failui.add("			<input type=\"hidden\" name=\"salinti\" value=\"pasalinti\">");
-		html_failui.add("			<input type=\"hidden\" name=\"id\" id=\"id_salinamo_iraso\" value=\"0\">");
-		html_failui.add("			<input type=\"submit\" tabindex=\"-1\" style=\"position:absolute; top:-1000px\">");
-		html_failui.add("		</form>");
 		html_failui.add("	</div>");
 		html_failui.add("</body>");
 		html_failui.add("</html>");
