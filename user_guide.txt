@@ -1,0 +1,27 @@
+﻿User guide
+
+      This is a guide for using an automated java exam generator. It is strongly advised that the first trial of  the program would be prior to the exam. This is a free open source generator, so feel free to modify the program files according to your needs. Steps to reproduce:
+
+1. Copy all files from the repository to your computer.
+2. Fill the src/egzaminuidemo2.csv with the data tables names, column names, java variable types of the data in the columns and the data.
+3. Fill the  src/egzaminui_ataskaita_is_html.csv with the search table names, variable names needed from HTML, java variable types.
+4. Fill the  src/egzaminui_ataskaita_i_html.csv with the report table names, column names, java variable types of the data in the columns.
+5. In the Eclipse program press File/Import... Choose Maven/Existing Maven Projects. Click “Next”. Write the filePath to the demo-master folder or use “Browse” to do that. Then tick the pom.xml checkbox and press “Finish”. The project demo will be added to the Package Explorer.
+6. Run src/main/java/egzaminui/demo/DemoApplicationCreate.java as 1 Java Application. Wait till the program finishes working.
+7. Press F5 (to refresh the project).
+8. Open the file pom.xml in the main demo-master folder. Uncomment the following (delete <!-- at the beginning and --> at the end) and save the file:
+<dependancy>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependancy>
+9. Go back to Eclipse and run src/main/java/egzaminui/demo/DemoApplication.java as 1 Java Application.
+10. Go to the browser and check if the database with the tables and data was created. http://localhost/phpmyadmin/server_databases.php 
+11. Check if the program works http://localhost:8080/  for the data tables CRUD (create, update, delete).
+12. Edit search .java files in the src/main/java/egzaminui/demo/ category and search .html files in the src/main/resources/templates/ category according to the exam task. 
+13. If needed add @OneToMany and @ManyToOne in other .java files to create bonds between the tables (examples are commented in .java files).
+14. Add foreign keys in the database.
+15. Do not forget to stop the program and refresh the project before trying to run the program again.
+16. Good luck with the exam :).
+
+      P.S. If you need to delete all the files that were autocreated, just run    
+      src/main/java/egzaminui/demo/DemoApplicationDelete.java as 1 Java Application.
