@@ -1,6 +1,7 @@
 package egzaminui.demo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.util.StringUtils;
 
@@ -12,11 +13,11 @@ import org.springframework.util.StringUtils;
  */
 public class KurtiPaieskosFaila {
 	/**
-	 * Sukuria LenteleBeDuomenu klasės kintamąjį duomenims iš Html gauti
+	 * @param lenteles LenteleBeDuomenu klasės kintamasis duomenims iš Html gauti
 	 */
 	private LenteleBeDuomenu lentele;
 	/**
-	 * Sukuria dar vieną LenteleBeDuomenu klasės kintamąjį duomenims iš duombazės gauti
+	 * @param lentele2 LenteleBeDuomenu klasės kintamasis duomenims iš duombazės gauti
 	 */
 	private LenteleBeDuomenu lentele2;
 	/**
@@ -34,7 +35,7 @@ public class KurtiPaieskosFaila {
 		this.lentele2 = lentele_i_html;
 	}
 	/**
-	 * String sąrašo tipo kintamasis, reikalingas java failo kūrimui
+	 * Metodas grąžinti String sąrašo tipo kintamajį java failo kūrimui
 	 * @return java_failui
 	 */
 	public ArrayList<String> javaFailui() {
@@ -55,7 +56,7 @@ public class KurtiPaieskosFaila {
 		java_failui.add("");
 		java_failui.add("public class " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " {");
 		java_failui.add("	/**");
-		java_failui.add("	 * Sukuria Session klasės kintamąjį");
+		java_failui.add("	 * @param em Session klasės kintamasis sukurti sesijai į duombazę");
 		java_failui.add("	 */");
 		java_failui.add("	protected Session em;	");
 		java_failui.add("	");
@@ -65,7 +66,8 @@ public class KurtiPaieskosFaila {
 		java_failui.add("	}	");
 		java_failui.add("");
 		java_failui.add("	/**");
-		java_failui.add("	 * sarasas duomenu gautas ivykdzius sql uzklausa duombazeje");
+		java_failui.add("	 * Metodas grąžinti " + StringUtils.capitalize(this.lentele2.getLenteles_pav()) + " sąrašo tipo kintamajį sudarytą įvykdžius sql uzklausą duombazėje");
+		java_failui.add("	 * @return (List<Ataskaita>) query.getResultList()");
 		java_failui.add("	 */");
 		java_failui.add("");
 		String duomenu_eilute = "";

@@ -11,19 +11,19 @@ import java.util.*;
 @Component
 public class LenteleBeDuomenu {
 	/**
-	 * Sukuria String tipo kintamąjį lentelės pavadinimui
+	 * @param lenteles_pav String tipo kintamasis lentelės pavadinimui
 	 */
 	private String lenteles_pav = "";
 	/**
-	 * Sukuria String sąrašo tipo kintamąjį stulpelių pavadinimams
+	 * @param stulpeliu_pav String sąrašo tipo kintamasis stulpelių pavadinimams
 	 */
 	private ArrayList<String> stulpeliu_pav;
 	/**
-	 * Sukuria String sąrašo tipo kintamąjį stulpelių tipams
+	 * @param String sąrašo tipo kintamasis stulpelių tipams
 	 */
 	private ArrayList<String> stulpeliu_tipai;
 	/**
-	 * Sukuria skaičiaus tipo kintamąjį stulpelių kiekiui
+	 * @param kiekis_stulpeliu skaičiaus tipo kintamasis stulpelių kiekiui
 	 */
 	private int kiekis_stulpeliu = 0;
 	/**

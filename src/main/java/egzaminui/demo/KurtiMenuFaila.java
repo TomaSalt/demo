@@ -14,11 +14,11 @@ import org.springframework.util.StringUtils;
 @Component
 public class KurtiMenuFaila {
 	/**
-	 * Sukuria LenteleBeDuomenu klasės sąrašo tipo kintamąjį lentelių duomenims
+	 * @param lenteles LenteleBeDuomenu klasės sąrašo tipo kintamasis lentelių duomenims
 	 */
 	private ArrayList<LenteleBeDuomenu> lenteles;
 	/**
-	 * Sukuria dar vieną LenteleBeDuomenu klasės sąrašo tipo kintamąjį paieskos lentelių
+	 * @param paieskos_lenteles LenteleBeDuomenu klasės sąrašo tipo kintamasis paieskos lentelių duomenims
 	 */
 	private ArrayList<LenteleBeDuomenu> paieskos_lenteles;
 	/**
@@ -37,7 +37,7 @@ public class KurtiMenuFaila {
 		
 	}	
 	/**
-	 * Papildomas String sąrašo tipo kintamasis duomenimis, reikalingais menu failo kūrimui
+	 * Metodas grąžinti String sąrašo tipo kintamajį menu failo kūrimui
 	 * @return java_failui
 	 */
 	public ArrayList<String> menuFailui() {	
@@ -71,8 +71,13 @@ public class KurtiMenuFaila {
 			kablelis = ", ";
 
 		}
-		java_failui.add("");
+		java_failui.add("/**");
+		java_failui.add("* @param itemurl String tipo kintamasis url adresui");
+		java_failui.add("*/");
 		java_failui.add("	private final String itemurl;");
+		java_failui.add("/**");
+		java_failui.add("* @param naujasPavadinimas String tipo kintamasis menu punkto pavadinimui");
+		java_failui.add("*/");
 		java_failui.add("	private final String naujasPavadinimas;");
 		java_failui.add("/**");
 		java_failui.add(" * Konstruktoriui perduodami String tipo url adresas ir pavadinimas");

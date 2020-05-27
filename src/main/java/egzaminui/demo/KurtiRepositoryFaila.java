@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
  */
 public class KurtiRepositoryFaila {
 	/**
-	 * Sukuria LenteleBeDuomenu klasės kintamąjį
+	 * @param lentele LenteleBeDuomenu klasės kintamasis
 	 */
 	private LenteleBeDuomenu lentele;
 	/**
@@ -28,7 +28,7 @@ public class KurtiRepositoryFaila {
 		
 	}
 	/**
-	 * Papildomas String sąrašo tipo kintamasis duomenimis
+	 * Metodas grąžinti String sąrašo tipo kintamajį Repository failo kūrimui
 	 * @return java_failui
 	 */
 	public ArrayList<String> repositoryFailui() {
@@ -41,7 +41,12 @@ public class KurtiRepositoryFaila {
 		java_failui.add("//import org.springframework.data.repository.Repository;");
 		java_failui.add("import org.springframework.data.repository.CrudRepository;");
 		java_failui.add("//import org.springframework.data.repository.query.Param;");
-		java_failui.add("");
+		java_failui.add("/**");
+		java_failui.add(" * Failas, skirtas " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "Repository java klasei, kuri papildo CrudRepository metodus pagal lentelės duomenis ir egzamino užduotį");
+		java_failui.add(" *");
+		java_failui.add(" * @author");
+		java_failui.add(" *");
+		java_failui.add(" */");
 		java_failui.add("public interface " + StringUtils.capitalize(lentele.getLenteles_pav()) + "Repository extends CrudRepository<" + StringUtils.capitalize(lentele.getLenteles_pav()) + ", Integer>{");
 		java_failui.add("");
 		java_failui.add("	//List<" + StringUtils.capitalize(lentele.getLenteles_pav()) + ">findBy" + StringUtils.capitalize(lentele.getStulpeliu_pav().get(1)) + "( " + lentele.getStulpeliu_tipai().get(1) + " " + lentele.getStulpeliu_pav().get(1) + " );");

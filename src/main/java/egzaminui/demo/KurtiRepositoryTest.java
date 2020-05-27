@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
  */
 public class KurtiRepositoryTest {
 	/**
-	 * Sukuria LenteleSuDuomenimis klasės kintamąjį
+	 * @param LenteleSuDuomenimis klasės kintamasis
 	 */
 	private LenteleSuDuomenimis lentele;
 	/**
@@ -28,32 +28,22 @@ public class KurtiRepositoryTest {
 		
 	}
 	/**
-	 * Papildomas String sąrašo tipo kintamasis duomenimis
+	 * Metodas grąžinti String sąrašo tipo kintamajį testų failo kūrimui
 	 * @return java_failui
 	 */
 	public ArrayList<String> repositoryTest() {
 		ArrayList<String> java_failui = new ArrayList<String>();
 		java_failui.add("package egzaminui.demo;");
 		java_failui.add("");
-		java_failui.add("//import static org.junit.Assert.assertEquals;");
-		java_failui.add("//import static org.junit.Assert.assertNotNull;");
 		java_failui.add("import static org.junit.jupiter.api.Assertions.assertEquals;");
 		java_failui.add("import static org.junit.jupiter.api.Assertions.assertNotNull;");
-		java_failui.add("");
-		java_failui.add("import java.util.List;");
 		java_failui.add("import java.util.Optional;");
-		java_failui.add("");
+		java_failui.add("import org.junit.Before;");
 		java_failui.add("import org.junit.jupiter.api.Test;");
-		java_failui.add("//import org.junit.Test;");
-		java_failui.add("//import org.junit.runner.RunWith;");
 		java_failui.add("import org.springframework.beans.factory.annotation.Autowired;");
-		java_failui.add("");
-		java_failui.add("//import org.springframework.test.context.junit4.SpringRunner;");
 		java_failui.add("import org.springframework.boot.test.context.SpringBootTest;");
 		java_failui.add("");
-		java_failui.add("// @RunWith(SpringRunner.class)");
-		java_failui.add("@SpringBootTest");
-		java_failui.add("");
+		java_failui.add("@SpringBootTest(classes = DemoApplication.class)");
 		java_failui.add("/**");
 		java_failui.add(" * Class tipo failas, skirtas " + this.lentele.getLenteles_pav() + " Repository testavimui");
 		java_failui.add(" * ");
@@ -61,12 +51,10 @@ public class KurtiRepositoryTest {
 		java_failui.add(" *");
 		java_failui.add(" */");
 		java_failui.add("public class " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "RepositoryTest {");
-		java_failui.add("");
-		java_failui.add("// @DataJpaTest");
-		java_failui.add("	@Autowired");
 		java_failui.add("/**");
 		java_failui.add(" * Sukuria " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "Repository tipo kintamąjį " + this.lentele.getLenteles_pav() + "Repository");
 		java_failui.add(" */");
+		java_failui.add("	@Autowired");
 		java_failui.add("	private " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "Repository " + this.lentele.getLenteles_pav() + "Repository;");
 		java_failui.add("	/**");
 		java_failui.add("	 * Metodas testuoti elemento išsaugojimą");
@@ -77,12 +65,21 @@ public class KurtiRepositoryTest {
 		String duomenu_eilute = "";
 		String kablelis = "";
 		for (int i = 1; i < this.lentele.getKiekis_stulpeliu(); i++) {
-			duomenu_eilute += kablelis + this.lentele.getLent_duomenys().get(1).get(i);
-			kablelis = ", ";
+			if(this.lentele.getStulpeliu_tipai().get(i).equals("String")) {
+				duomenu_eilute += kablelis + "\"10" + this.lentele.getLent_duomenys().get(1).get(i) + "\"";
+				kablelis = ", ";
+			} else {
+				duomenu_eilute += kablelis + this.lentele.getLent_duomenys().get(1).get(i) + 100;
+				kablelis = ", ";
+			}
 		}
 		java_failui.add("		" + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " elementas = new " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "(100, " + duomenu_eilute +");");
 		java_failui.add("		" + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " element = " + this.lentele.getLenteles_pav() + "Repository.save(elementas);");
-		java_failui.add("		" + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " el = " + this.lentele.getLenteles_pav() + "Repository.findBy" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(1)) + "("+ this.lentele.getLent_duomenys().get(1).get(1)+");");
+		if(this.lentele.getStulpeliu_tipai().get(1).equals("String")) {
+			java_failui.add("		" + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " el = " + this.lentele.getLenteles_pav() + "Repository.findBy" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(1)) + "(\"10"+ this.lentele.getLent_duomenys().get(1).get(1) + "\");");
+		} else {
+			java_failui.add("		" + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " el = " + this.lentele.getLenteles_pav() + "Repository.findBy" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(1)) + "("+ this.lentele.getLent_duomenys().get(1).get(1) + 100 + ");");
+		}
 		java_failui.add("		assertNotNull(elementas);");
 		java_failui.add("		assertNotNull(el);        ");
 		for (int i = 1; i < this.lentele.getKiekis_stulpeliu(); i++) {
@@ -107,8 +104,14 @@ public class KurtiRepositoryTest {
 		java_failui.add("");
 		java_failui.add("		" + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " elementas = new " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "( 101, " + duomenu_eilute + ");");
 		java_failui.add("	    " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " el = " + this.lentele.getLenteles_pav() + "Repository.save( elementas );        ");
-		java_failui.add("	    " + this.lentele.getLenteles_pav() + "Repository.delete( el );                  					    // -- pagal pavyzdį neveikia  :(  ");
-		java_failui.add("	    " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " element = " + this.lentele.getLenteles_pav() + "Repository.findBy" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(1)) + "(" + this.lentele.getLent_duomenys().get(1).get(1) + ");");
+		java_failui.add("	    " + this.lentele.getLenteles_pav() + "Repository.delete( el );");
+		if(this.lentele.getStulpeliu_tipai().get(1).equals("String")) {
+			
+			java_failui.add("	    " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " element = " + this.lentele.getLenteles_pav() + "Repository.findBy" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(1)) + "(\"10" + this.lentele.getLent_duomenys().get(1).get(1) + "\");");
+		} else {
+			
+			java_failui.add("	    " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " element = " + this.lentele.getLenteles_pav() + "Repository.findBy" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(1)) + "(" + this.lentele.getLent_duomenys().get(1).get(1) + 100 + ");");
+		}
 		java_failui.add("	    assertEquals( element, null );		");
 		java_failui.add("	}");
 		java_failui.add("	/**");

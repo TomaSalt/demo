@@ -32,7 +32,7 @@ public class KurtiHtmlPaieskaiFaila {
 		this.ataskaitos_lentele = ataskaitos_lentele;
 	}
 	/**
-	 * Papildomas String sąrašo tipo kintamasis duomenimis
+	 * Metodas grąžinti String sąrašo tipo kintamajį HTML failo kūrimui
 	 * @return html_failui
 	 */
 	public ArrayList<String> htmlFailui() {

@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
  */
 public class KurtiHtmlFaila {
 	/**
-	 * Sukuria LenteleBeDuomenu klasės kintamąjį
+	 * @param lentele LenteleBeDuomenu klasės kintamasis
 	 */
 	private LenteleBeDuomenu lentele;
 	/**
@@ -27,7 +27,7 @@ public class KurtiHtmlFaila {
 		this.lentele = lentele;
 	}
 	/**
-	 * Papildomas String sąrašo tipo kintamasis duomenimis
+	 * Metodas grąžinti String sąrašo tipo kintamajį HTML failo kūrimui
 	 * @return html_failui
 	 */
 	public ArrayList<String> htmlFailui() {

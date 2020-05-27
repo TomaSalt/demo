@@ -11,11 +11,11 @@ import java.util.*;
 @Component
 public class LenteleSuDuomenimis extends LenteleBeDuomenu{
 	/**
-	 * Sukuria skaičiaus tipo kintamąjį duomenų eilučių skaičiui
+	 * @param duomenu_eiluciu_skaicius skaičiaus tipo kintamasis duomenų eilučių skaičiui
 	 */
 	private int duomenu_eiluciu_skaicius = 0;
 	/**
-	 * Sukuria String sąrašo sąraše tipo kintamąjį lentelės duomenims
+	 * @param lent_duomenys String sąrašo sąraše tipo kintamasis lentelės duomenims
 	 */
 	private ArrayList<ArrayList<String>> lent_duomenys;
 	/**
