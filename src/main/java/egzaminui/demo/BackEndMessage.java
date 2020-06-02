@@ -1,22 +1,22 @@
 
 package egzaminui.demo;
 /**
- * Class tipo failas, skirtas žinutės išvedimui į ekraną
+ * Failas, skirtas žinutės išvedimui į ekraną
  * 
  * @author Toma
  *
  */
 public class BackEndMessage {
 	/**
-	 * Sukuria String tipo kintamąjį žinutei į ekraną
+	 * Sukuriamas String tipo kintamasis žinutei į ekraną
 	 */
 	String message;
 	/**
-	 * Sukuria String tipo kintamąjį css klasės vardui
+	 * Sukuriamas String tipo kintamasis css klasės vardui
 	 */
 	String css_class;
 	/**
-	 * Sukuria boolean tipo kintamąjį formos atnaujinimui
+	 * Sukuriamas boolean tipo kintamąjį formos atnaujinimui
 	 */
 	boolean flag_reopen_form;
 	/**
@@ -29,13 +29,16 @@ public class BackEndMessage {
 	}	
 	/**
 	 * Konstruktoriui perduodama žinutės tekstas, formos atnaujinimo patvirtinimas, css klasės vardas
+	 * @param message String tipo kintamasis žinutei į ekraną
+	 * @param flag_reopen_form boolean tipo kintamąjį formos atnaujinimui
+	 * @param css_klase String tipo kintamasis css klasės vardui
 	 */
 	public BackEndMessage(String message, boolean flag_reopen_form, String css_klase) {
 		
 		super();
 		this.message = message;
 		this.flag_reopen_form = flag_reopen_form;
-		css_class = css_klase;		
+		this.css_class = css_klase;		
 	}
 	/**
 	 * Message getter'is
@@ -46,7 +49,7 @@ public class BackEndMessage {
 		return message;
 	}
 	/**
-	 * Message setter'is
+	 * @param message setter'is
 	 */
 	public void setMessage(String message) {
 		
@@ -54,13 +57,14 @@ public class BackEndMessage {
 	}
 	/**
 	 * Metodas pridėti teksto į žinutę
+	 * @param add_message String tipo kintamasis teksto į žinutę pridėjimui
 	 */
 	public void addMessage( String add_message ) {
 	
 		this.message += add_message; 
 	}
 	/**
-	 * boolean tipo kintamasis formos atnaujinimo patvirtinimui
+	 * Metodas grąžinantis boolean tipo kintamąjį formos atnaujinimo patvirtinimui
 	 * @return flag_reopen_form
 	 */
 	public boolean isFlag_reopen_form() {
@@ -68,7 +72,7 @@ public class BackEndMessage {
 		return flag_reopen_form;
 	}
 	/**
-	 * metodas formos atnaujinimo patvirtinimui pakeisti
+	 * @param flag_reopen_form setter'is
 	 */
 	public void setFlag_reopen_form(boolean flag_reopen_form) {
 		
@@ -83,7 +87,7 @@ public class BackEndMessage {
 		return css_class;
 	}
 	/**
-	 * Css_class setter'is
+	 * @param css_klase setter'is
 	 */
 	public void setCss_class( String css_klase ) {
 		

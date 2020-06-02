@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
 /**
- * Class tipo failas, skirtas duomenų įrašymui į failą
+ * Failas, skirtas duomenų įrašymui į failą
  * 
  * @author Toma
  *
@@ -22,6 +22,7 @@ public class RasymasFaile {
 	}
 	/**
 	 * Konstruktoriui perduodamas failo vardas
+	 * @param vardas_failo String tipo kintamasis failo vardui
 	 */
 	public RasymasFaile( String vardas_failo ) {
 		
@@ -36,7 +37,8 @@ public class RasymasFaile {
 		return vardas_failo;
 	}
 	/**
-	 * Vardas_failo setter'is
+	 * @param vardas_failo setter'is
+	 * 
 	 */
 	public void setVardas_failo( String vardas_failo ) {
 		
@@ -44,6 +46,7 @@ public class RasymasFaile {
 	}	
 	/**
 	 * Metodas įrašymui į failą po eilutę
+	 * @param zodziai String sąrašo tipo kintamasis žodžiams
 	 */
 	public void iEilutes ( ArrayList<String> zodziai ) {
 		

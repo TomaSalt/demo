@@ -6,18 +6,18 @@ import java.util.List;
 import org.springframework.util.StringUtils;
 
 /**
- * Failas, skirtas kuriamo Java failo duomenims įvesti pagal ataskaitos ir paieškos lentelės duomenis
+ * Failas, skirtas kurti Java failą, sql užklausų kūrimui, pagal ataskaitos ir paieškos lentelių duomenis
  * 
  * @author Toma
  *
  */
 public class KurtiPaieskosFaila {
 	/**
-	 * @param lenteles LenteleBeDuomenu klasės kintamasis duomenims iš Html gauti
+	 * Sukuria LenteleBeDuomenu klasės kintamąjį duomenims iš Html gauti
 	 */
 	private LenteleBeDuomenu lentele;
 	/**
-	 * @param lentele2 LenteleBeDuomenu klasės kintamasis duomenims iš duombazės gauti
+	 * Sukuria LenteleBeDuomenu klasės kintamąjį duomenims iš duombazės gauti
 	 */
 	private LenteleBeDuomenu lentele2;
 	/**
@@ -28,6 +28,8 @@ public class KurtiPaieskosFaila {
 	}
 	/**
 	 * Konstruktoriui perduodami LenteleBeDuomenu klasės tipo kintamieji, reikalingi paimti duomenis iš Html ir iš duomenų bazės
+	 * @param lentele_is_html LenteleBeDuomenu klasės kintamasis paieškos lentelei
+	 * @param lentele_i_html LenteleBeDuomenu klasės kintamasis ataskaitos lentelei
 	 */
 	public KurtiPaieskosFaila(LenteleBeDuomenu lentele_is_html, LenteleBeDuomenu lentele_i_html) {
 		
@@ -50,16 +52,20 @@ public class KurtiPaieskosFaila {
 		java_failui.add("/**");
 		java_failui.add(" * Failas, skirtas sukurti sql uzklausa ir pasiimti duomenis is duomenu bazes");
 		java_failui.add(" * ");
-		java_failui.add(" * @author Toma");
+		java_failui.add(" * @author x");
 		java_failui.add(" *");
 		java_failui.add(" */");
 		java_failui.add("");
 		java_failui.add("public class " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " {");
 		java_failui.add("	/**");
-		java_failui.add("	 * @param em Session klasės kintamasis sukurti sesijai į duombazę");
+		java_failui.add("	 * Sukuria em Session klasės kintamąjį sesijai į duombazę");
 		java_failui.add("	 */");
 		java_failui.add("	protected Session em;	");
 		java_failui.add("	");
+		java_failui.add("	/**");
+		java_failui.add("	 * Metodas priskirti Session klasės kintamąjį");
+		java_failui.add("	 * @param em Session klasės kintamasis sukurti sesijai į duombazę");
+		java_failui.add("	 */");
 		java_failui.add("	public " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " (  Session em  ) {");
 		java_failui.add("		  ");
 		java_failui.add("		this.em = em;");
@@ -67,7 +73,10 @@ public class KurtiPaieskosFaila {
 		java_failui.add("");
 		java_failui.add("	/**");
 		java_failui.add("	 * Metodas grąžinti " + StringUtils.capitalize(this.lentele2.getLenteles_pav()) + " sąrašo tipo kintamajį sudarytą įvykdžius sql uzklausą duombazėje");
-		java_failui.add("	 * @return (List<Ataskaita>) query.getResultList()");
+		for( int y=0; y < lentele.getKiekis_stulpeliu(); y++ ) {
+			java_failui.add("	* @param " + lentele.getStulpeliu_pav().get(y) + " " + StringUtils.capitalize(lentele.getStulpeliu_tipai().get(y)) + " klasės tipo kintamasis");
+		}
+		java_failui.add("	 * @return (List<Ataskaita>)query.getResultList()");
 		java_failui.add("	 */");
 		java_failui.add("");
 		String duomenu_eilute = "";
@@ -78,25 +87,19 @@ public class KurtiPaieskosFaila {
 		}
 		java_failui.add("	public List<" + StringUtils.capitalize(this.lentele2.getLenteles_pav()) + "> ataskaitosLentele ( " + duomenu_eilute + " ) {");
 		java_failui.add("	  ");
+		java_failui.add("	  //!!! Sudaroma WHERE sąlyga pagal užduotį !!!");
 		java_failui.add("		String where = \"WHERE \"");
-		java_failui.add("				+ 	\"`lenteles_pavadinimas`.`" + this.lentele.getStulpeliu_pav().get(0) + "`=\" + " + this.lentele.getStulpeliu_pav().get(0) + ";");
-		java_failui.add("		int checkbox = 0;");
-		java_failui.add("		//if (" + this.lentele.getStulpeliu_pav().get(1) + " == 1 && " + this.lentele.getStulpeliu_pav().get(2) + " == 0) {");
+		java_failui.add("				+ 	\"`lenteles_pavadinimas`.`" + this.lentele2.getStulpeliu_pav().get(0) + "`=\" + " + this.lentele.getStulpeliu_pav().get(0) + ";");
+		java_failui.add("		where += \" AND `lenteles_pav`.`" + this.lentele2.getStulpeliu_pav().get(1) + "`= \" + " + this.lentele.getStulpeliu_pav().get(1) + ";");
 		java_failui.add("		  ");
-		java_failui.add("		//	checkbox = 1;");
-		java_failui.add("		//	where += \" AND `lenteles_pav`.`lenteles_stulp`= \" + checkbox;");
-		java_failui.add("		  ");
-		java_failui.add("		//}");
-		java_failui.add("		if (" + this.lentele.getStulpeliu_pav().get(1) + " == 0 && " + this.lentele.getStulpeliu_pav().get(2) + " == 1) {");
-		java_failui.add("		   ");
-		java_failui.add("		 	where += \" AND `lenteles_pav`.`lenteles_stulp`= \" + checkbox;");
-		java_failui.add("		}");
+		java_failui.add("		where += \" AND `lenteles_pav`.`" + this.lentele2.getStulpeliu_pav().get(2) +"`= \" + " + this.lentele.getStulpeliu_pav().get(2) + ";");
 		java_failui.add("	  ");
+		java_failui.add("	  //!!! Lentelių pavadinimus pakeisti pagal užduotį !!!");
 		java_failui.add("		String sql_qw =");
 		java_failui.add("	  				");
 		java_failui.add("	  		\"SELECT SQL_CALC_FOUND_ROWS \" ");
-		for (int i = 0; i < this.lentele.getKiekis_stulpeliu(); i++) {
-			java_failui.add("				+ 	\"`lenteles_pavadinimas`.`" + this.lentele.getStulpeliu_pav().get(i) + "` AS `" + this.lentele2.getStulpeliu_pav().get(i) + "` \"");
+		for (int i = 0; i < this.lentele2.getKiekis_stulpeliu(); i++) {
+			java_failui.add("				+ 	\"`lenteles_pavadinimas`.`" + this.lentele2.getStulpeliu_pav().get(i) + "` AS `" + this.lentele2.getStulpeliu_pav().get(i) + "` \"");
 		}
 		java_failui.add("				+ \"FROM \"");
 		java_failui.add("				+ 		\"`lent_pavadinimas` \"  ");
@@ -107,7 +110,9 @@ public class KurtiPaieskosFaila {
 		java_failui.add("				+ where");
 		java_failui.add("				");
 		java_failui.add("			+ \" ORDER BY\"");
-		java_failui.add("			+	   \" `lent_pavadinimas`.`kiekis` DESC \"");
+		java_failui.add("			+	   \" `lent_pavadinimas`.`" + this.lentele2.getStulpeliu_pav().get(0) + "` DESC \"");
+		java_failui.add("			+ \" GROUP BY\"");
+		java_failui.add("			+	   \" `lent_pavadinimas`.`" + this.lentele2.getStulpeliu_pav().get(0) + "`\"");
 		java_failui.add("				;");
 		java_failui.add("	  	System.out.println ( sql_qw );");
 		java_failui.add("	    Query query = em.createNativeQuery ( sql_qw );");

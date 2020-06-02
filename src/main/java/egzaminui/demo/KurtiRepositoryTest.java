@@ -3,14 +3,14 @@ package egzaminui.demo;
 import java.util.ArrayList;
 import org.springframework.util.StringUtils;
 /**
- * Failas, skirtas kuriamo java RepositoryTest failo duomenims įvesti pagal lentelės duomenis
+ * Failas, skirtas kurti java RepositoryTest failą pagal duomenų bazės lentelės duomenis
  * 
  * @author Toma
  *
  */
 public class KurtiRepositoryTest {
 	/**
-	 * @param LenteleSuDuomenimis klasės kintamasis
+	 * Sukuria LenteleSuDuomenimis klasės kintamąjį
 	 */
 	private LenteleSuDuomenimis lentele;
 	/**
@@ -21,6 +21,7 @@ public class KurtiRepositoryTest {
 	}
 	/**
 	 * Konstruktoriui perduodami LenteleSuDuomenimis klasės tipo duomenys
+	 * @param lentele LenteleBeDuomenu klasės kintamasis duomenų bazės lentelei
 	 */
 	public KurtiRepositoryTest(LenteleSuDuomenimis lentele) {
 		
@@ -47,7 +48,7 @@ public class KurtiRepositoryTest {
 		java_failui.add("/**");
 		java_failui.add(" * Class tipo failas, skirtas " + this.lentele.getLenteles_pav() + " Repository testavimui");
 		java_failui.add(" * ");
-		java_failui.add(" * @author ");
+		java_failui.add(" * @author x");
 		java_failui.add(" *");
 		java_failui.add(" */");
 		java_failui.add("public class " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "RepositoryTest {");

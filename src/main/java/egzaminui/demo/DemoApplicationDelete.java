@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
 
 /**
- * Failas, skirtas paleisti ir valdyti programą
+ * Failas, skirtas ištrinti egzamino programą
  * 
  * @author Toma
  *
@@ -21,6 +21,7 @@ import org.springframework.util.StringUtils;
 public class DemoApplicationDelete {
 	/**
 	 * Pagrindinis programos veikimo metodas
+	 * @param args programos trynimo argumentai
 	 */
 	public static void main(String[] args) {
 		/**
@@ -63,6 +64,9 @@ public class DemoApplicationDelete {
 		pagr.skaitytiIsFailo();
 		pagr.gautiLenteles();
 		ataskaitos_lent = pagr.getLenteles_be_duomenu();
+		/**
+		 * Sukuria String sąrašo tipo kintamąjį trinamų failų vardams
+		 */
 		ArrayList<String> failu_sarasas = new ArrayList<String>();
 		failu_sarasas.add("main/java/egzaminui/demo/Menu.java");
 		failu_sarasas.add("main/java/egzaminui/demo/PageController.java");
@@ -90,6 +94,7 @@ public class DemoApplicationDelete {
 			     System.out.println("Trinamas src/" + failu_sarasas.get(i));
 			}
 		}
+		//trinama duomenų bazė
 		try{
 			KurtiDuombaze db_trynimas = new KurtiDuombaze("demo", lent_su_duomenimis);
 			db_trynimas.trinti();

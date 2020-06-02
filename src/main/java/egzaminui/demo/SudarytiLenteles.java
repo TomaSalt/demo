@@ -3,7 +3,7 @@ package egzaminui.demo;
 import java.util.ArrayList;
 import java.util.Arrays;
 /**
- * Class tipo failas, skirtas lentelių sudarymui pagal duomenis iš nuskaityto failo
+ * Failas, skirtas lentelių sudarymui pagal duomenis iš nuskaityto failo
  * 
  * @author Toma
  *
@@ -33,6 +33,7 @@ public class SudarytiLenteles {
 	}
 	/**
 	 * Konstruktoriui perduodami sąrašo tipo duomenys
+	 * @param duomenys String sąrašo tipo kintamasis duomenims
 	 */
 	public SudarytiLenteles(ArrayList<String> duomenys) {
 		
@@ -65,7 +66,7 @@ public class SudarytiLenteles {
 		return lenteliu_skaicius;
 	}
 	/**
-	 * Lenteliu_skaicius setter'is
+	 * @param lenteliu_skaicius setter'is
 	 */
 	public void setLenteliu_skaicius(Integer lenteliu_skaicius) {
 		
@@ -80,7 +81,7 @@ public class SudarytiLenteles {
 		return lenteles_su_duomenimis;
 	}
 	/**
-	 * Lenteles_su_duomenimis setter'is
+	 * @param lenteles_su_duomenimis setter'is
 	 */
 	public void setLenteles_su_duomenimis(ArrayList<LenteleSuDuomenimis> lenteles_su_duomenimis) {
 		
@@ -95,7 +96,7 @@ public class SudarytiLenteles {
 		return lenteles_be_duomenu;
 	}
 	/**
-	 * Lenteles_be_duomenu setter'is
+	 * @param lenteles_be_duomenu setter'is
 	 */
 	public void setLenteles_be_duomenu(ArrayList<LenteleBeDuomenu> lenteles_be_duomenu) {
 		

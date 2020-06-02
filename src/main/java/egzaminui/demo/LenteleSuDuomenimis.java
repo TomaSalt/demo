@@ -3,7 +3,7 @@ package egzaminui.demo;
 import org.springframework.stereotype.Component;
 import java.util.*;
 /**
- * Class tipo failas, skirtas lentelės su duomenimis sudarymui pagal perduotus duomenis, kuris paveldi LenteleBeDuomenu klasę
+ * Failas, skirtas lentelės su duomenimis sudarymui pagal perduotus duomenis, kuris paveldi LenteleBeDuomenu klasę
  * 
  * @author Toma
  *
@@ -11,11 +11,11 @@ import java.util.*;
 @Component
 public class LenteleSuDuomenimis extends LenteleBeDuomenu{
 	/**
-	 * @param duomenu_eiluciu_skaicius skaičiaus tipo kintamasis duomenų eilučių skaičiui
+	 * Sukuria skaičiaus tipo kintamąjį duomenų eilučių skaičiui
 	 */
 	private int duomenu_eiluciu_skaicius = 0;
 	/**
-	 * @param lent_duomenys String sąrašo sąraše tipo kintamasis lentelės duomenims
+	 * Sukuria String sąrašo sąraše tipo kintamąjį lentelės duomenims
 	 */
 	private ArrayList<ArrayList<String>> lent_duomenys;
 	/**
@@ -26,6 +26,12 @@ public class LenteleSuDuomenimis extends LenteleBeDuomenu{
 	}
 	/**
 	 * Konstruktoriui perduodamas lentelės pavadinimas, stulpelių pavadinimai, tipai ir kiekis, duomenų eilučių skaičius ir duomenys
+	 * @param lenteles_pav String tipo kintamasis lentelės pavadinimui
+	 * @param stulpeliu_pav String sąrašo tipo kintamasis stulpelių pavadinimams
+	 * @param stulpeliu_tipai String sąrašo tipo kintamasis stulpelių tipams
+	 * @param kiekis_stulpeliu Integer tipo kintamasis stulpelių kiekiui
+	 * @param duomenu_eiluciu_skaicius Integer tipo kintamasis duomenų eilučių skaičiui
+	 * @param lent_duomenys String sąrašo sąraše tipo kintamasis duomenims
 	 */
 	public LenteleSuDuomenimis(String lenteles_pav, ArrayList<String> stulpeliu_pav, ArrayList<String> stulpeliu_tipai, int kiekis_stulpeliu, int duomenu_eiluciu_skaicius, ArrayList<ArrayList<String>> lent_duomenys) {		
 		
@@ -39,10 +45,10 @@ public class LenteleSuDuomenimis extends LenteleBeDuomenu{
 	 * @return duomenu_eiluciu_skaicius
 	 */
 	public int getDuomenu_eiluciu_skaicius() {
-		return duomenu_eiluciu_skaicius;
+		return this.duomenu_eiluciu_skaicius;
 	}
 	/**
-	 * Duomenu_eiluciu_skaicius setter'is
+	 * @param duomenu_eiluciu_skaicius setter'is
 	 */
 	public void setDuomenu_eiluciu_skaicius(int duomenu_eiluciu_skaicius) {
 		this.duomenu_eiluciu_skaicius = duomenu_eiluciu_skaicius;
@@ -52,10 +58,10 @@ public class LenteleSuDuomenimis extends LenteleBeDuomenu{
 	 * @return lent_duomenys
 	 */
 	public ArrayList<ArrayList<String>> getLent_duomenys() {
-		return lent_duomenys;
+		return this.lent_duomenys;
 	}
 	/**
-	 * Lent_duomenys setter'is
+	 * @param lent_duomenys setter'is
 	 */
 	public void setLent_duomenys(ArrayList<ArrayList<String>> lent_duomenys) {
 		this.lent_duomenys = lent_duomenys;

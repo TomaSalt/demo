@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
 /**
- * Failas, skirtas paleisti ir valdyti programą
+ * Failas, skirtas sukurti egzamino programą
  * 
  * @author Toma
  *
@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 public class DemoApplicationCreate {
 	/**
 	 * Pagrindinis programos veikimo metodas
+	 * @param args programos kūrimo argumentai
 	 */
 	public static void main(String[] args) {
 		/**
@@ -59,33 +60,37 @@ public class DemoApplicationCreate {
 		pagr.skaitytiIsFailo();
 		pagr.gautiLenteles();
 		ataskaitos_lent = pagr.getLenteles_be_duomenu();
-		
+		//kuriamas menu failas
 		KurtiMenuFaila menu = new KurtiMenuFaila(lent_be_duomenu, paieskos_lent);
 		ArrayList<String> duomenys = menu.menuFailui();
 		irasomo_failo_vardas = "src/main/java/egzaminui/demo/Menu.java";
 		pagr.setIrasomo_failo_var(irasomo_failo_vardas);
 		RasymasFaile rasymas = new RasymasFaile(irasomo_failo_vardas);
 		rasymas.iEilutes(duomenys);
+		//kuriamas pageController failas
 		KurtiPageControllerFaila pageControllerFailoDuomenys = new KurtiPageControllerFaila(lent_be_duomenu, paieskos_lent, ataskaitos_lent);
 		duomenys = pageControllerFailoDuomenys.javaFailui();
 		irasomo_failo_vardas = "src/main/java/egzaminui/demo/PageController.java";
 		rasymas = new RasymasFaile(irasomo_failo_vardas);
 		rasymas.iEilutes(duomenys);
+		//kuriama duomenų bazė
 		KurtiDuombaze db_kurimas = new KurtiDuombaze("demo", lent_su_duomenimis);
 		db_kurimas.kurti();
 		// failų, kuriamų iš paieškos ir ataskaitos lentelių ciklas
 		for(int i = 0; i < ataskaitos_lent.size(); i++) {
-
+			//kuriamas paieškos klasės java failas
 			KurtiPaieskosFaila java_paieska = new KurtiPaieskosFaila(paieskos_lent.get(i), ataskaitos_lent.get(i));
 			duomenys = java_paieska.javaFailui();
 			irasomo_failo_vardas = "src/main/java/egzaminui/demo/" + StringUtils.capitalize(paieskos_lent.get(i).getLenteles_pav()) + ".java";
 			rasymas = new RasymasFaile(irasomo_failo_vardas);
 			rasymas.iEilutes(duomenys);
+			//kuriamas ataskaitos klasės java failas
 			KurtiJavaFaila java_ataskaita = new KurtiJavaFaila(ataskaitos_lent.get(i));
 			duomenys = java_ataskaita.javaFailui();
 			irasomo_failo_vardas = "src/main/java/egzaminui/demo/" + StringUtils.capitalize(ataskaitos_lent.get(i).getLenteles_pav()) + ".java";
 			rasymas = new RasymasFaile(irasomo_failo_vardas);
 			rasymas.iEilutes(duomenys);
+			//kuriamas paieškos html failas
 			KurtiHtmlPaieskaiFaila html_paieskai = new KurtiHtmlPaieskaiFaila(paieskos_lent.get(i), ataskaitos_lent.get(i));
 			duomenys = html_paieskai.htmlFailui();
 			irasomo_failo_vardas = "src/main/resources/templates/" + paieskos_lent.get(i).getLenteles_pav() + ".html";
@@ -94,22 +99,25 @@ public class DemoApplicationCreate {
 		}
 		// failų, kuriamų iš lentelių be duomenų ir su duomenimos ciklas
 		for(int i = 0; i < lent_be_duomenu.size(); i++) {
-
+			//kuriamas lentelės klasės java failas
 			KurtiJavaFaila javaFailoDuomenys = new KurtiJavaFaila(lent_be_duomenu.get(i));
 			duomenys = javaFailoDuomenys.javaFailui();
 			irasomo_failo_vardas = "src/main/java/egzaminui/demo/" + StringUtils.capitalize(lent_be_duomenu.get(i).getLenteles_pav()) + ".java";
 			rasymas = new RasymasFaile(irasomo_failo_vardas);
 			rasymas.iEilutes(duomenys);
+			//kuriamas lentelės Repository klasės java failas
 			KurtiRepositoryFaila repositoryFailoDuomenys = new KurtiRepositoryFaila(lent_be_duomenu.get(i));
 			duomenys = repositoryFailoDuomenys.repositoryFailui();
 			irasomo_failo_vardas = "src/main/java/egzaminui/demo/" + StringUtils.capitalize(lent_be_duomenu.get(i).getLenteles_pav()) + "Repository.java";
 			rasymas = new RasymasFaile(irasomo_failo_vardas);
 			rasymas.iEilutes(duomenys);
+			//kuriamas lentelės Repository Test klasės java failas
 			KurtiRepositoryTest repositoryTestDuomenys = new KurtiRepositoryTest(lent_su_duomenimis.get(i));
 			duomenys = repositoryTestDuomenys.repositoryTest();
 			irasomo_failo_vardas = "src/test/java/egzaminui/demo/" + StringUtils.capitalize(lent_be_duomenu.get(i).getLenteles_pav()) + "RepositoryTest.java";
 			rasymas = new RasymasFaile(irasomo_failo_vardas);
 			rasymas.iEilutes(duomenys);
+			//kuriamas lentelės klasės html failas
 			KurtiHtmlFaila htmlFailoDuomenys = new KurtiHtmlFaila(lent_be_duomenu.get(i));
 			duomenys = htmlFailoDuomenys.htmlFailui();
 			irasomo_failo_vardas = "src/main/resources/templates/" + lent_be_duomenu.get(i).getLenteles_pav() + ".html";

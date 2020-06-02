@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
 /**
- * Class tipo failas, skirtas duomenų įrašymui į failą su pagalbiniais priedais, kuris paveldi RasymasFaile
+ * Failas, skirtas duomenų įrašymui į failą su pagalbiniais priedais, kuris paveldi RasymasFaile
  * 
  * @author Toma
  *
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class RasymasFaile2 extends RasymasFaile {
 	/**
 	 * Konstruktoriui perduodamas failo vardas
+	 * @param vardas_failo String tipo kintamasis failo vardui
 	 */
 	public RasymasFaile2(String vardas_failo) {
 		

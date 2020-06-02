@@ -6,7 +6,7 @@ import java.util.Arrays;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 /**
- * Failas, skirtas kuriamo menu java failo duomenims įvesti pagal lentelės duomenis
+ * Failas, skirtas menu java failą pagal duomenų bazės ir paieškos lentelių duomenis
  * 
  * @author Toma
  *
@@ -14,11 +14,11 @@ import org.springframework.util.StringUtils;
 @Component
 public class KurtiMenuFaila {
 	/**
-	 * @param lenteles LenteleBeDuomenu klasės sąrašo tipo kintamasis lentelių duomenims
+	 * Sukuria LenteleBeDuomenu klasės sąrašo tipo kintamąjį lentelių duomenims
 	 */
 	private ArrayList<LenteleBeDuomenu> lenteles;
 	/**
-	 * @param paieskos_lenteles LenteleBeDuomenu klasės sąrašo tipo kintamasis paieskos lentelių duomenims
+	 * Sukuria LenteleBeDuomenu klasės sąrašo tipo kintamąjį paieškos lentelių duomenims
 	 */
 	private ArrayList<LenteleBeDuomenu> paieskos_lenteles;
 	/**
@@ -29,6 +29,8 @@ public class KurtiMenuFaila {
 	}
 	/**
 	 * Konstruktoriui perduodami LenteleBeDuomenu klasės sąrašo tipo duomenys, reikalingi menu failo sudarymui
+	 * @param lenteles LenteleBeDuomenu klasės sąrašo tipo kintamasis duomenų bazės lentelėms
+	 * @param paieskos_lenteles LenteleBeDuomenu klasės sąrašo tipo kintamasis paieškos lentelėms
 	 */
 	public KurtiMenuFaila(ArrayList<LenteleBeDuomenu> lenteles, ArrayList<LenteleBeDuomenu> paieskos_lenteles) {
 		
@@ -49,7 +51,7 @@ public class KurtiMenuFaila {
 		java_failui.add("/**");
 		java_failui.add(" * Failas, skirtas Menu klasės duomenims įvesti pagal lentelių pavadinimus");
 		java_failui.add(" *");
-		java_failui.add(" * @author ");
+		java_failui.add(" * @author x");
 		java_failui.add(" *");
 		java_failui.add(" */");
 		java_failui.add("public enum Menu {");

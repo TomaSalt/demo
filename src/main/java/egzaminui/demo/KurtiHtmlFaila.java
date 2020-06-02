@@ -3,14 +3,14 @@ package egzaminui.demo;
 import java.util.ArrayList;
 import org.springframework.util.StringUtils;
 /**
- * Failas, skirtas kuriamo HTML failo duomenims įvesti pagal lentelės duomenis
+ * Failas, skirtas kurti HTML failą pagal duomenų bazės lentelės duomenis
  * 
  * @author Toma
  *
  */
 public class KurtiHtmlFaila {
 	/**
-	 * @param lentele LenteleBeDuomenu klasės kintamasis
+	 * Sukuria LenteleBeDuomenu klasės kintamąjį
 	 */
 	private LenteleBeDuomenu lentele;
 	/**
@@ -21,6 +21,7 @@ public class KurtiHtmlFaila {
 	}
 	/**
 	 * Konstruktoriui perduodami LenteleBeDuomenu klasės tipo duomenys
+	 * @param lentele LenteleBeDuomenu klasės tipo kintamasis
 	 */
 	public KurtiHtmlFaila(LenteleBeDuomenu lentele) {
 		

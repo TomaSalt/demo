@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.springframework.util.StringUtils;
 
 /**
- * Failas, skirtas sukurti lentele duomenu bazeje pagal lentelės duomenis
+ * Failas, skirtas sukurti lentelę duomenų bazėje pagal duomenų bazės lentelės duomenis
  * 
  * @author Toma
  *
@@ -26,6 +26,7 @@ public class KurtiSqlLentele {
 	}
 	/**
 	 * Konstruktoriui perduodami LenteleSuDuomenimis class tipo duomenys
+	 * @param lentele LenteleBeDuomenu klasės kintamasis duomenų bazės lentelei
 	 */
 	public KurtiSqlLentele(LenteleSuDuomenimis lentele) {
 		

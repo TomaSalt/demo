@@ -3,7 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 /**
- * Class tipo failas, skirtas duomenų nuskaitymui iš failo
+ * Failas, skirtas duomenų nuskaitymui iš failo
  * 
  * @author Toma
  *
@@ -28,6 +28,7 @@ public class SkaitymasIsFailo {
 	}
 	/**
 	 * Konstruktoriui perduodamas failo vardas
+	 * @param vardas_failo String tipo kintamasis skaitomo failo vardui
 	 */
 	public SkaitymasIsFailo ( String vardas_failo ) {
 		
@@ -42,7 +43,7 @@ public class SkaitymasIsFailo {
 		return vardas_failo;
 	}
 	/**
-	 * Vardas_failo setter'is
+	 * @param vardas_failo setter'is
 	 */
 	public void setVardas_failo( String vardas_failo ) {
 		

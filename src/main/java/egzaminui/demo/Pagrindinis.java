@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.springframework.stereotype.Component;
 /**
- * Class tipo failas, skirtas nurodyti skaitomo, įrašomo failų vardams ir duomenų iš jų paėmimui, apdorojimui ir išsaugojimui
+ * Failas, skirtas nurodyti skaitomo, įrašomo failų vardams ir duomenų iš jų paėmimui, apdorojimui ir išsaugojimui
  * 
  * @author Toma
  *
@@ -24,7 +24,7 @@ public class Pagrindinis{
 	 */
 	private String skaitomo_failo_var;
 	/**
-	 * Sukuria String tipo kintamąjį įrašomo failo vardui
+	 * Sukuria String tipo kintamajį įrašomo failo vardui
 	 */
 	private String irasomo_failo_var;
 	/**
@@ -32,7 +32,7 @@ public class Pagrindinis{
 	 */
 	ArrayList<String> nuskaityti_duomenys;
 	/**
-	 * Sukuria LenteleSuDuomenimis klasės sąrašo tipo kintamąjį lentelėms su duomenimis
+	 * Sukuria LenteleSuDuomenimis klasės sąrašo tipo kintamajį lentelėms su duomenimis
 	 */	
 	ArrayList<LenteleSuDuomenimis> lenteles;
 	/**
@@ -40,7 +40,7 @@ public class Pagrindinis{
 	 */	
 	ArrayList<LenteleBeDuomenu> lenteles_be_duomenu;
 	/**
-	 * Sukuria LenteleSuDuomenimis klasės sąrašo tipo kintamąjį lentelėms su duomenimis
+	 * Sukuria LenteleSuDuomenimis klasės sąrašo tipo kintamajį lentelėms su duomenimis
 	 */	
 	Integer lenteliu_skaicius = 0;
 	/**
@@ -51,6 +51,10 @@ public class Pagrindinis{
 	}
 	/**
 	 * Konstruktoriui perduodami skaitymas ir rašymas bei skaitomo, įrašomo failų vardai
+	 * @param sf SkaitymasIsFailo klasės tipo kintamasis skaitymui iš failo
+	 * @param rf RasymasFaile klasės tipo kintamasis įrašymui į failą
+	 * @param skaitomo_failo_var String tipo kintamasis skaitomo failo vardui
+	 * @param irasomo_failo_var String tipo kintamasis įrašomo failo vardui
 	 */
 	public Pagrindinis(SkaitymasIsFailo sf, RasymasFaile rf, String skaitomo_failo_var, String irasomo_failo_var){
 
@@ -84,7 +88,7 @@ public class Pagrindinis{
 		return skaitomo_failo_var;
 	}
 	/**
-	 * Skaitomo_failo_var setter'is
+	 * @param skaitomo_failo_var setter'is
 	 */
 	public void setSkaitomo_failo_var(String skaitomo_failo_var) {
 		
@@ -99,7 +103,7 @@ public class Pagrindinis{
 		return irasomo_failo_var;
 	}
 	/**
-	 * Irasomo_failo_var setter'is
+	 * @param irasomo_failo_var setter'is
 	 */
 	public void setIrasomo_failo_var(String irasomo_failo_var) {
 		
@@ -144,7 +148,7 @@ public class Pagrindinis{
 		return lenteles;
 	}
 	/**
-	 * Lenteles setter'is
+	 * @param lenteles setter'is
 	 */
 	public void setLenteles(ArrayList<LenteleSuDuomenimis> lenteles) {
 		
@@ -159,7 +163,7 @@ public class Pagrindinis{
 		return lenteles_be_duomenu;
 	}
 	/**
-	 * Lenteles_be_duomenu setter'is
+	 * @param lenteles_be_duomenu setter'is
 	 */
 	public void setLenteles_be_duomenu(ArrayList<LenteleBeDuomenu> lenteles_be_duomenu) {
 		

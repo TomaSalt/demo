@@ -3,7 +3,7 @@ package egzaminui.demo;
 import java.sql.*;
 import java.util.ArrayList;
 /**
- * Failas, skirtas kurti duombazei pagal lentelių duomenis
+ * Failas, skirtas kurti duombazę pagal lentelių duomenis
  * 
  * @author Toma
  *
@@ -36,6 +36,8 @@ public class KurtiDuombaze {
 	ArrayList<LenteleSuDuomenimis> lenteles;
 	/**
 	 * Konstruktoriui perduodamas duombazės pavadinimas ir LenteleSuDuomenimis klasės sąrašo tipo duomenys, reikalingi kurti duombazę
+	 * @param name duomenų bazės vardas
+	 * @param lenteles LenteleSuDuomenimis klasės sąrašo tipo kintamasis
 	 */
 	public KurtiDuombaze(String name, ArrayList<LenteleSuDuomenimis> lenteles) {
 	   

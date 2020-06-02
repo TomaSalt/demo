@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
 /**
- * Failas, skirtas paleisti sudarytą programą
+ * Failas, skirtas paleisti egzamino programą
  * 
  * @author Toma
  *
@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 public class DemoApplication {
 	/**
 	 * Pagrindinis programos veikimo metodas
+	 * @param args programos paleidimo argumentai
 	 */
 	public static void main(String[] args) {
 	

@@ -3,18 +3,18 @@ package egzaminui.demo;
 import java.util.ArrayList;
 import org.springframework.util.StringUtils;
 /**
- * Failas, skirtas kuriamo HTML failo duomenims įvesti pagal lentelės duomenis
+ * Failas, skirtas kurti HTML failą pagal paieškos ir ataskaitos lentelės duomenis
  * 
  * @author Toma
  *
  */
 public class KurtiHtmlPaieskaiFaila {
 	/**
-	 * @param ataskaitos_lentele LenteleBeDuomenu klasės kintamasis ataskaitos lentelei
+	 * Sukuria LenteleBeDuomenu klasės kintamąjį ataskaitos lentelei
 	 */
 	private LenteleBeDuomenu ataskaitos_lentele;
 	/**
-	 * @param lentele LenteleBeDuomenu klasės kintamasis paieškos lentelei
+	 * Sukuria LenteleBeDuomenu klasės kintamąjį paieškos lentelei
 	 */
 	private LenteleBeDuomenu lentele;
 	/**
@@ -25,6 +25,8 @@ public class KurtiHtmlPaieskaiFaila {
 	}
 	/**
 	 * Konstruktoriui perduodami LenteleBeDuomenu klasės tipo duomenys
+	 * @param lentele LenteleBeDuomenu klasės kintamasis duombazės lentelei
+	 * @param ataskaitos_lentele LenteleBeDuomenu klasės kintamasis ataskaitos lentelei
 	 */
 	public KurtiHtmlPaieskaiFaila(LenteleBeDuomenu lentele, LenteleBeDuomenu ataskaitos_lentele) {
 		

@@ -3,7 +3,7 @@ package egzaminui.demo;
 import org.springframework.stereotype.Component;
 import java.util.*;
 /**
- * Class tipo failas, skirtas lentelės be duomenų sudarymui pagal perduotus pavadinimus ir tipus
+ * Failas, skirtas lentelės be duomenų sudarymui pagal perduotus pavadinimus ir tipus
  * 
  * @author Toma
  *
@@ -11,19 +11,19 @@ import java.util.*;
 @Component
 public class LenteleBeDuomenu {
 	/**
-	 * @param lenteles_pav String tipo kintamasis lentelės pavadinimui
+	 * Sukuria String tipo kintamąjį lentelės pavadinimui
 	 */
 	private String lenteles_pav = "";
 	/**
-	 * @param stulpeliu_pav String sąrašo tipo kintamasis stulpelių pavadinimams
+	 * Sukuria String sąrašo tipo kintamąjį stulpelių pavadinimams
 	 */
 	private ArrayList<String> stulpeliu_pav;
 	/**
-	 * @param String sąrašo tipo kintamasis stulpelių tipams
+	 * Sukuria String sąrašo tipo kintamąjį stulpelių tipams
 	 */
 	private ArrayList<String> stulpeliu_tipai;
 	/**
-	 * @param kiekis_stulpeliu skaičiaus tipo kintamasis stulpelių kiekiui
+	 * Sukuria kiekis_stulpeliu skaičiaus tipo kintamąjį stulpelių kiekiui
 	 */
 	private int kiekis_stulpeliu = 0;
 	/**
@@ -34,6 +34,10 @@ public class LenteleBeDuomenu {
 	}
 	/**
 	 * Konstruktoriui perduodamas lentelės pavadinimas, stulpelių pavadinimai, tipai ir kiekis
+	 * @param lenteles_pav kintamasis lentelės pavadinimui
+	 * @param stulpeliu_pav String sąrašo tipo kintamasis stulpelių pavadinimams
+	 * @param stulpeliu_tipai String sąrašo tipo kintamasis stulpelių tipams
+	 * @param kiekis_stulpeliu Integer tipo kintamasis stulpelių kiekiui
 	 */
 	public LenteleBeDuomenu(String lenteles_pav, ArrayList<String> stulpeliu_pav, ArrayList<String> stulpeliu_tipai, int kiekis_stulpeliu) {		
 		
@@ -48,12 +52,14 @@ public class LenteleBeDuomenu {
 	 * @return lenteles_pav
 	 */
 	public String getLenteles_pav() {
-		return lenteles_pav;
+		
+		return this.lenteles_pav;
 	}
 	/**
-	 * Lenteles_pav setter'is
+	 * @param lenteles_pav setter'is
 	 */
 	public void setLenteles_pav(String lenteles_pav) {
+		
 		this.lenteles_pav = lenteles_pav;
 	}
 	/**
@@ -61,12 +67,14 @@ public class LenteleBeDuomenu {
 	 * @return stulpeliu_pav
 	 */
 	public ArrayList<String> getStulpeliu_pav() {
-		return stulpeliu_pav;
+		
+		return this.stulpeliu_pav;
 	}
 	/**
-	 * Stulpeliu_pav setter'is
+	 * @param stulpeliu_pav setter'is
 	 */
 	public void setStulpeliu_pav(ArrayList<String> stulpeliu_pav) {
+		
 		this.stulpeliu_pav = stulpeliu_pav;
 	}
 	/**
@@ -77,7 +85,7 @@ public class LenteleBeDuomenu {
 		return stulpeliu_tipai;
 	}
 	/**
-	 * Stulpeliu_tipai setter'is
+	 * @param stulpeliu_tipai setter'is
 	 */
 	public void setStulpeliu_tipai(ArrayList<String> stulpeliu_tipai) {
 		this.stulpeliu_tipai = stulpeliu_tipai;
@@ -90,7 +98,7 @@ public class LenteleBeDuomenu {
 		return kiekis_stulpeliu;
 	}
 	/**
-	 * Kiekis_stulpeliu setter'is
+	 * @param kiekis_stulpeliu setter'is
 	 */
 	public void setKiekis_stulpeliu(int kiekis_stulpeliu) {
 		this.kiekis_stulpeliu = kiekis_stulpeliu;

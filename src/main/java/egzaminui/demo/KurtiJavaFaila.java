@@ -3,14 +3,14 @@ package egzaminui.demo;
 import java.util.ArrayList;
 import org.springframework.util.StringUtils;
 /**
- * Failas, skirtas kuriamo java failo duomenims įvesti pagal lentelės duomenis
+ * Failas, skirtas kurti java klasės failą pagal duomenų bazės lentelės duomenis
  * 
  * @author Toma
  *
  */
 public class KurtiJavaFaila {
 	/**
-	 * @param lenteles LenteleBeDuomenu klasės kintamasis
+	 * Sukuria LenteleBeDuomenu klasės kintamąjį
 	 */
 	private LenteleBeDuomenu lentele;
 	/**
@@ -21,6 +21,7 @@ public class KurtiJavaFaila {
 	}
 	/**
 	 * Konstruktoriui perduodami LenteleBeDuomenu klasės tipo duomenys
+	 * @param lentele_be_duomenu LenteleBeDuomenu klasės kintamasis duomenų bazės lentelei
 	 */
 	public KurtiJavaFaila(LenteleBeDuomenu lentele_be_duomenu) {
 		
@@ -48,7 +49,7 @@ public class KurtiJavaFaila {
 		java_failui.add("/**");
 		java_failui.add(" * Failas, skirtas " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + " java klasės failo duomenims įvesti pagal lentelės duomenis");
 		java_failui.add(" *");
-		java_failui.add(" * @author");
+		java_failui.add(" * @author x");
 		java_failui.add(" *");
 		java_failui.add(" */");
 		java_failui.add("@Entity //iesko duomenu bazeje tokios lenteles");
@@ -59,7 +60,7 @@ public class KurtiJavaFaila {
 		for (int i = 0; i < this.lentele.getKiekis_stulpeliu(); i++ ) {
 			
 			java_failui.add("	/**");
-			java_failui.add("	 * Sukuria " + this.lentele.getStulpeliu_tipai().get(i) + " tipo kintamąjį " + this.lentele.getStulpeliu_pav().get(i)); 
+			java_failui.add("	 * Sukuria " + this.lentele.getStulpeliu_tipai().get(i) + " klasės tipo kintamąjį "); 
 			java_failui.add("	 */");
 			java_failui.add("	private " + this.lentele.getStulpeliu_tipai().get(i) + " " + this.lentele.getStulpeliu_pav().get(i) + ";");
 		}
@@ -82,6 +83,9 @@ public class KurtiJavaFaila {
 		sarasas += this.lentele.getStulpeliu_tipai().get(this.lentele.getKiekis_stulpeliu()-1) + " " + this.lentele.getStulpeliu_pav().get(this.lentele.getKiekis_stulpeliu()-1) + " ) {";
 		java_failui.add("	/**");
 		java_failui.add("	 * Konstruktoriui perduodami lentelės duomenys");
+		for (int i = 0; i < (this.lentele.getKiekis_stulpeliu()); i++) {
+			java_failui.add("	 * @param " + this.lentele.getStulpeliu_pav().get(i) + " " + this.lentele.getStulpeliu_tipai().get(i) + " klasės tipo kintamasis");
+		}
 		java_failui.add("	 */");
 		java_failui.add("	public " + StringUtils.capitalize(this.lentele.getLenteles_pav()) + "( " + sarasas);
 		java_failui.add("		super();");
@@ -108,6 +112,7 @@ public class KurtiJavaFaila {
 			java_failui.add("	}");
 			java_failui.add("	/**");
 			java_failui.add("	 * " + this.lentele.getStulpeliu_pav().get(i) + " setter'is");
+			java_failui.add("	 * @param " + this.lentele.getStulpeliu_pav().get(i) + " " + this.lentele.getStulpeliu_tipai().get(i) + " klasės tipo kintamasis");
 			java_failui.add("	 */");
 			java_failui.add("	public void set" + StringUtils.capitalize(this.lentele.getStulpeliu_pav().get(i)) + "( " + this.lentele.getStulpeliu_tipai().get(i) + " " + this.lentele.getStulpeliu_pav().get(i) + " ) {");
 			java_failui.add("");
