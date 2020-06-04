@@ -89,30 +89,33 @@ public class KurtiPaieskosFaila {
 		java_failui.add("	  ");
 		java_failui.add("	  //!!! Sudaroma WHERE sąlyga pagal užduotį !!!");
 		java_failui.add("		String where = \"WHERE \"");
-		java_failui.add("				+ 	\"`lenteles_pavadinimas`.`" + this.lentele2.getStulpeliu_pav().get(0) + "`=\" + " + this.lentele.getStulpeliu_pav().get(0) + ";");
-		java_failui.add("		where += \" AND `lenteles_pav`.`" + this.lentele2.getStulpeliu_pav().get(1) + "`= \" + " + this.lentele.getStulpeliu_pav().get(1) + ";");
+		
+		java_failui.add("				+ 	\"`lentele1`.`" + this.lentele.getStulpeliu_pav().get(0) + "`= " + Character.toString ((char) 92) + "\"\" + " + this.lentele.getStulpeliu_pav().get(0) + " + \"" + Character.toString ((char) 92) + "\"\";");
+		java_failui.add("		where += \" AND `lentele3`.`" + this.lentele.getStulpeliu_pav().get(1) + "`= " + Character.toString ((char) 92) + "\"\" + " + this.lentele.getStulpeliu_pav().get(1) + " + \"" + Character.toString ((char) 92) + "\"\";");
 		java_failui.add("		  ");
-		java_failui.add("		where += \" AND `lenteles_pav`.`" + this.lentele2.getStulpeliu_pav().get(2) +"`= \" + " + this.lentele.getStulpeliu_pav().get(2) + ";");
+		java_failui.add("		where += \" AND `lentele1`.`" + this.lentele.getStulpeliu_pav().get(2) +"`= " + Character.toString ((char) 92) + "\"\" + " + this.lentele.getStulpeliu_pav().get(2) + " + \"" + Character.toString ((char) 92) + "\"\";");
 		java_failui.add("	  ");
 		java_failui.add("	  //!!! Lentelių pavadinimus pakeisti pagal užduotį !!!");
 		java_failui.add("		String sql_qw =");
 		java_failui.add("	  				");
 		java_failui.add("	  		\"SELECT SQL_CALC_FOUND_ROWS \" ");
+		kablelis = "";
 		for (int i = 0; i < this.lentele2.getKiekis_stulpeliu(); i++) {
-			java_failui.add("				+ 	\"`lenteles_pavadinimas`.`" + this.lentele2.getStulpeliu_pav().get(i) + "` AS `" + this.lentele2.getStulpeliu_pav().get(i) + "` \"");
+			java_failui.add("				+ 	\""+ kablelis + "`lentele3`.`" + this.lentele2.getStulpeliu_pav().get(i) + "` AS `" + this.lentele2.getStulpeliu_pav().get(i) + "` \"");
+			kablelis = ", ";
 		}
 		java_failui.add("				+ \"FROM \"");
-		java_failui.add("				+ 		\"`lent_pavadinimas` \"  ");
+		java_failui.add("				+ 		\"`lentele3` \"  ");
 		java_failui.add("				+ \"LEFT JOIN \"");
-		java_failui.add("				+ \"		`lenteles_pavadinimas` ON ( \"");       
-		java_failui.add("				+ 			\"`lenteles_pavadinimas`.`id`=`lent_pavadinimas`.`lenteles_pavadinimas_id` \"");
+		java_failui.add("				+ \"		`lentele1` ON ( \"");       
+		java_failui.add("				+ 			\"`lentele1`.`id`=`lentele3`.`lentele1_id` \"");
 		java_failui.add("				+ 		\") \"");
 		java_failui.add("				+ where");
 		java_failui.add("				");
-		java_failui.add("			+ \" ORDER BY\"");
-		java_failui.add("			+	   \" `lent_pavadinimas`.`" + this.lentele2.getStulpeliu_pav().get(0) + "` DESC \"");
 		java_failui.add("			+ \" GROUP BY\"");
-		java_failui.add("			+	   \" `lent_pavadinimas`.`" + this.lentele2.getStulpeliu_pav().get(0) + "`\"");
+		java_failui.add("			+	   \" `lentele1`.`stulp2`\"");
+		java_failui.add("			+ \" ORDER BY\"");
+		java_failui.add("			+	   \" `lentele3`.`" + this.lentele2.getStulpeliu_pav().get(0) + "` DESC \"");
 		java_failui.add("				;");
 		java_failui.add("	  	System.out.println ( sql_qw );");
 		java_failui.add("	    Query query = em.createNativeQuery ( sql_qw );");

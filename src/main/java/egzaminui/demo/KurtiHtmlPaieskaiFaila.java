@@ -178,7 +178,7 @@ public class KurtiHtmlPaieskaiFaila {
 			}
 			if(this.lentele.getStulpeliu_tipai().get(i).equals("Integer") || this.lentele.getStulpeliu_tipai().get(i).equals("Double")){
 				
-				html_failui.add("				<input type=\"number\" name=\"" + this.lentele.getStulpeliu_pav().get(i) + "\" id=\"" + this.lentele.getStulpeliu_pav().get(i) + "\" value=\"0\" class=\"text ui-widget-content ui-corner-all\" required>");
+				html_failui.add("				<input type=\"number\" name=\"" + this.lentele.getStulpeliu_pav().get(i) + "\" id=\"" + this.lentele.getStulpeliu_pav().get(i) + "\" value=\"1\" class=\"text ui-widget-content ui-corner-all\" required>");
 			}
 		}
 		
@@ -203,15 +203,13 @@ public class KurtiHtmlPaieskaiFaila {
 		html_failui.add("			</tr>");
 		html_failui.add("			</thead>");
 		html_failui.add("			<tbody>");
-		html_failui.add("			<tr th:each=\"" + this.ataskaitos_lentele.getLenteles_pav() + " : ${lst}\">");
+		html_failui.add("			<tr th:each=\"" + this.ataskaitos_lentele.getLenteles_pav() + " : ${sql_ataskaitai}\">");
 		/*html_failui.add("				<td>");
 		html_failui.add("					<a th:href=\"@{/elementas(id=${elementas.getId()})}\" th:text=\"${elementas.getPav()}\"></a>");
 		html_failui.add("				</td>");*/
 		for (int i = 0; i < this.ataskaitos_lentele.getStulpeliu_pav().size(); i++) {
-			html_failui.add("				<td th:text=\"${" + this.ataskaitos_lentele.getLenteles_pav() + ".get" + StringUtils.capitalize(this.ataskaitos_lentele.getStulpeliu_pav().get(i)) + "()}\"></td>");
+			html_failui.add("				<td th:text=\"${" + this.ataskaitos_lentele.getLenteles_pav() + "[" + i + "]}\"></td>");
 		}
-		/*html_failui.add("				<td th:text=\"${elementas.getKilme()}==1 ? 'gyvuline' : 'augaline'\">");
-		html_failui.add("				</td>");*/
 		html_failui.add("			</tr>");
 		html_failui.add("			</tbody>");
 		html_failui.add("		</table>");

@@ -169,4 +169,18 @@ public class Pagrindinis{
 		
 		this.lenteles_be_duomenu = lenteles_be_duomenu;
 	}
+	/**
+	 * Nuskaityti_duomenys getter'is
+	 * @return nuskaityti_duomenys
+	 */
+	public ArrayList<String> getNuskaityti_duomenys() {
+		return nuskaityti_duomenys;
+	}
+	/**
+	 * @param nuskaityti_duomenys setter'is
+	 */
+	public void setNuskaityti_duomenys(ArrayList<String> nuskaityti_duomenys) {
+		this.nuskaityti_duomenys = nuskaityti_duomenys;
+	}
+	
 }
